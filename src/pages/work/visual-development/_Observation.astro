@@ -1,0 +1,48 @@
+---
+import {geometry} from "./_image-geometry";
+interface Pick { id:string; label:string; image:string; alt:string; href:string; caption:string; pair?:string; pairAlt?:string; map?:{image:string;alt:string;x:number;y:number;width:number;height:number}; }
+interface Props { title:string; prompt:string; action:string; picks:Pick[]; layout?:string; first?:boolean; }
+const {title,prompt,action,picks,layout="",first=false}=Astro.props;
+---
+<section class:list={["observation",layout]} aria-label={title}>
+<div class="curation"><h2>{title}</h2><p>{prompt}</p><nav aria-label={title+" selections"}>{picks.map(p=><a href={"#"+p.id}>{p.label}</a>)}</nav></div>
+<div class="views">{picks.map((p,i)=><figure id={p.id} tabindex="-1"><div class:list={["inspect-stage",p.map&&"mapped"]}>{p.map&&<div class="source-map"><img src={p.map.image} width={geometry[p.map.image].width} height={geometry[p.map.image].height} loading={first&&i===0?"eager":"lazy"} alt={p.map.alt}/><span aria-hidden="true" style={{left:p.map.x+"%",top:p.map.y+"%",width:p.map.width+"%",height:p.map.height+"%"}}></span></div>}<div class:list={['canvas',p.pair&&'pair']}><img src={p.image} width={geometry[p.image].width} height={geometry[p.image].height} srcset={geometry[p.image].srcset} sizes={p.id==="pavilion-full"?"(max-width:720px) 55vw, 370px":"(max-width:720px) 90vw, (min-width:1500px) 990px, 64vw"} alt={p.alt} loading={first&&i===0?"eager":"lazy"} fetchpriority={first&&i===0?"high":undefined}/>{p.pair&&<img src={p.pair} width={geometry[p.pair].width} height={geometry[p.pair].height} loading="lazy" alt={p.pairAlt}/>}</div></div><figcaption><span>{p.caption}</span><a href={p.href}>{action} <span aria-hidden="true">↗</span></a></figcaption></figure>)}</div></section>
+<style>
+.observation{display:grid;grid-template-columns:minmax(175px,.48fr) minmax(0,1.52fr);align-items:center;gap:clamp(1rem,4.4vw,5rem);padding:clamp(1.8rem,4.5vw,4.6rem) 0;border-top:1px solid #20252048}.curation h2{font:400 clamp(2.65rem,4.6vw,5rem)/.96 var(--serif,Georgia);letter-spacing:-.035em;margin:0}.curation p{font-size:1rem;line-height:1.5;max-width:29ch;margin:1rem 0 1.1rem}.curation nav{display:flex;flex-wrap:wrap;gap:0 .9rem}.curation a,.views figcaption a{color:#662d1b;min-height:44px;display:inline-flex;align-items:center;gap:.45em;text-underline-offset:4px}.curation [aria-current=true]{font-weight:700;text-decoration-thickness:2px}.views{min-width:0}.views figure{margin:0;scroll-margin-top:2rem;display:none}.views figure:first-child,.views figure:target{display:block}.views:has(figure:target) figure:first-child:not(:target){display:none}.canvas{background:white;display:flex;align-items:center;justify-content:center;min-width:0}.canvas img{max-height:clamp(270px,50vw,570px);max-width:100%;width:auto;height:auto;display:block}.pair{gap:8%;padding:clamp(12px,2.5vw,36px)}.pair img{width:auto;max-width:45%;height:clamp(160px,24vw,370px);object-fit:contain;align-self:flex-end}.pair img+img{height:clamp(98px,15vw,226px)}.views figcaption{min-height:48px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0 .8rem;font-size:.93rem}.views figcaption>span{color:#475046}.views figcaption a{font-weight:600}.panel .canvas img{width:100%;max-height:none}.painting .canvas{background:#e8e5db}.painting .canvas img{width:auto;max-height:clamp(230px,40vw,490px)}.vertical .canvas img{max-height:clamp(390px,62vw,660px)}.vertical .canvas{background:#e8e5db}
+@media(max-width:720px){.observation{grid-template-columns:1fr;gap:.5rem}.curation h2{font-size:clamp(2.4rem,10vw,4.5rem)}.curation p{margin:.4rem 0 0;max-width:unset}.views figure{scroll-margin-top:1rem}.views figcaption{align-items:center}.views figcaption a{margin-left:auto}.views figure:focus-visible{outline-offset:0}.curation nav{gap:0 .8rem}.canvas img{max-height:440px}.pair img{height:182px}.pair img+img{height:113px}}
+.panel{grid-template-columns:1fr;gap:1.1rem}.panel .curation{display:grid;grid-template-columns:1fr .9fr 1fr;gap:2rem;align-items:end}.panel .curation p,.panel .curation nav{margin:0}.panel .curation nav{justify-content:flex-end}.mapped{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(1rem,4vw,5rem);align-items:center}.source-map{position:relative}.source-map img{display:block;width:100%;height:auto}.source-map span{position:absolute;border:2px solid #813820;box-shadow:0 0 0 2px #fff;pointer-events:none}.mapped .canvas img{height:auto;width:100%;max-height:none}.panel .views figcaption{border-top:1px solid #2025203b;margin-top:.8rem}.painting{grid-template-columns:minmax(0,1.5fr) minmax(180px,.56fr);gap:clamp(1.3rem,5vw,6rem)}.painting .curation{grid-column:2;grid-row:1}.painting .views{grid-column:1;grid-row:1}.painting .canvas img{width:100%;max-height:560px;object-fit:contain}
+@media(max-width:720px){.panel .curation,.painting{display:block}.panel .curation p{margin-top:.4rem}.panel .curation nav{justify-content:flex-start}.mapped{grid-template-columns:1fr;gap:.65rem}.mapped .source-map{max-width:86%;order:2}.mapped .canvas{order:1}.panel .views figcaption{margin-top:.4rem}.painting .views{margin-top:.4rem}}
+@media(max-width:720px){.curation h2{font-size:clamp(38px,10vw,72px);overflow-wrap:anywhere}.views figcaption,.curation p,.curation nav{overflow-wrap:anywhere}}
+@media(max-width:720px){
+  .curation nav{gap:4px 6px}
+  .curation nav a{padding-inline:10px;border:1px solid transparent}
+  .curation nav a[aria-current=true]{background:var(--ink);color:var(--paper);border-color:var(--ink);text-decoration:none}
+}
+</style>
+<script>
+import {gsap} from "gsap";
+const blocks=Array.from(document.querySelectorAll<HTMLElement>(".observation"));
+const mm=gsap.matchMedia();
+let inlineChoice:{link:HTMLAnchorElement,top:number}|undefined;
+function markChoices(){for(const section of blocks){const links=Array.from(section.querySelectorAll<HTMLAnchorElement>(".curation nav a"));const current=links.find(a=>a.hash===location.hash)??links[0];links.forEach(a=>a.setAttribute("aria-current",String(a===current)));}}
+for(const section of blocks){
+ section.querySelector("nav")?.addEventListener("click",(event)=>{
+  const mouse=event as MouseEvent;const link=(event.target as Element).closest<HTMLAnchorElement>("a");
+  if(!link||mouse.metaKey||mouse.ctrlKey||mouse.altKey||mouse.shiftKey||mouse.button!==0)return;
+  if(link.hash===location.hash){event.preventDefault();return;}
+  inlineChoice={link,top:window.scrollY};
+ });
+}
+function onSelection(){markChoices();if(!inlineChoice||inlineChoice.link.hash!==location.hash){inlineChoice=undefined;return;}
+ const {link,top}=inlineChoice;inlineChoice=undefined;
+ window.scrollTo({top,behavior:"instant"});link.focus({preventScroll:true});
+}
+window.addEventListener("hashchange",onSelection);
+mm.add("(prefers-reduced-motion: no-preference)",()=>{
+ function settle(){const figure=document.querySelector(".views figure:target .inspect-stage");if(figure){gsap.fromTo(figure,{y:5},{y:0,duration:.23,ease:"power2.out",clearProps:"transform",overwrite:true});}}
+ window.addEventListener("hashchange",settle);return ()=>window.removeEventListener("hashchange",settle);
+});
+markChoices();window.addEventListener("pageshow",markChoices);
+</script>
+
+

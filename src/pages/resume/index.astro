@@ -1,0 +1,10 @@
+---
+import Site from "../../layouts/Site.astro";
+import {getResume,profile} from "../../components/profile/profile.mjs";
+import "../../styles/personal.css";
+const resume=getResume("public");
+---
+<Site title="Résumé" current="resume"><article class="resume-leaf wrap"><header><p class="page-label">Junran Zhao</p><h1>Résumé</h1><p>{profile.role}</p></header>
+<section class="resume-record"><div class="resume-file"><h2>Artist résumé</h2>{resume&&<><p>PDF · 1 page · {resume.kib} KiB</p><a class="ink-button" href={resume.href} download="Junran-Zhao-Resume.pdf">Download résumé ↓</a><a class="underlink" href={resume.href}>Open résumé PDF ↗</a></>}</div>
+<dl class="cv"><div><dt>Education</dt><dd>Academy of Art University, San Francisco<br/>Undergraduate study in Animation and Visual Effects</dd></div>
+<div><dt>Practice</dt><dd>2D animation, character design, storyboarding, scene perspective and stop-motion animation.</dd></div><div><dt>Tools</dt><dd>Harmony, RoughAnimator, Procreate, Photoshop, After Effects and Maya.</dd></div><div><dt>Work samples</dt><dd><a href="/work/fox-motion-studies/">Fox motion studies ↗</a><br/><a href="/work/character-studies/">Character sheets ↗</a><br/><a href="/work/storyboard-sheets/">Camera movement studies ↗</a></dd></div><div><dt>Contact</dt><dd><a href="/contact/">Email Junran ↗</a></dd></div></dl></section></article></Site>

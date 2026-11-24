@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "fox-motion-studies",
+    "category": "animation",
+    "title": "Fox motion studies",
+    "summary": "One fox, three kinds of movement. A tug on a rope, a reach for a branch and a sudden encounter with a truck.",
+    "roles": [
+      "2D animation",
+      "Character drawing"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Animation and drawing"
+        ]
+      }
+    ],
+    "media": [
+      "fox-pull",
+      "fox-branch",
+      "fox-truck",
+      "fox-turnaround"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "room-light-studies",
+    "category": "visual-development",
+    "title": "Room light studies",
+    "summary": "The furniture stays put. The light moves across the floor, catches the shelves and changes the feel of the whole room.",
+    "roles": [
+      "Environment design",
+      "Lighting studies"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Visual development"
+        ]
+      }
+    ],
+    "media": [
+      "room-morning",
+      "room-night",
+      "room-neon"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "temple-environment",
+    "category": "visual-development",
+    "title": "Temple interiors",
+    "summary": "Two views into the same temple. Rows of warm lamps give way to a cool central figure and a bright sign on the wall.",
+    "roles": [
+      "Environment design"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Environment studies"
+        ]
+      }
+    ],
+    "media": [
+      "temple-warm",
+      "temple-cool"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "character-studies",
+    "category": "illustration",
+    "title": "Character sheets",
+    "summary": "A collection of turnarounds, expressions and gestures. The sibling sheets follow a pair of characters from individual poses to moments together.",
+    "roles": [
+      "Character design"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Character drawing"
+        ]
+      }
+    ],
+    "media": [
+      "siblings",
+      "siblings-poses",
+      "siblings-turnaround",
+      "satchel-character"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "storyboard-sheets",
+    "category": "storyboards",
+    "title": "Camera movement studies",
+    "summary": "Two independent sheets set a wide drawing above three smaller views. The red arrows mark how the framing moves across each drawing.",
+    "roles": [
+      "Storyboarding"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Storyboard drawing"
+        ]
+      }
+    ],
+    "media": [
+      "sword-board",
+      "window-board"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "red-hood-and-wolf",
+    "category": "illustration",
+    "title": "Red Hood and the Wolf",
+    "summary": "Beneath the branches, a wolf offers a handful of red berries to a hooded girl.",
+    "roles": [
+      "Illustration"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Illustration"
+        ]
+      }
+    ],
+    "media": [
+      "red-hood"
+    ],
+    "publication": "reviewed"
+  },
+  {
+    "slug": "pavilion-and-phoenix",
+    "category": "illustration",
+    "title": "Tengwang Pavilion and Phoenix",
+    "summary": "A phoenix opens its wings over the pavilion. Fine black lines give each feather and each row of roof tiles a distinct rhythm.",
+    "roles": [
+      "Illustration"
+    ],
+    "credits": [
+      {
+        "person": "Junran Zhao",
+        "roles": [
+          "Illustration"
+        ]
+      }
+    ],
+    "media": [
+      "pavilion-phoenix"
+    ],
+    "publication": "reviewed"
+  }
+]
+

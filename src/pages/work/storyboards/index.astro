@@ -1,0 +1,7 @@
+---
+import Site from "../../../layouts/Site.astro";
+import Observation from "../visual-development/_Observation.astro";
+import {boards,panelImage} from "../../../components/remake/boards-data.mjs";
+import "../visual-development/_edition.css";
+---
+<Site title="Storyboards" current="work" description="Explore Junran Zhao’s two camera studies from their drawings to the original storyboard sheets."><article class="edition"><header class="folio-intro"><h1>Storyboards</h1><p>Choose a framing. Find its exact place on Junran’s original sheet and follow the drawn camera move.</p></header>{boards.map((b,index)=><Observation first={index===0} layout="panel" title={b.name} prompt={b.id==="sword"?"The blade stays in view as a second face enters the frame.":"The window corner fills more of the frame as the standing figure slips out."} action="Locate this panel" picks={b.panels.map((p,i)=>({id:b.id+"-panel-"+(i+1),label:p.name,image:panelImage(b,i),alt:p.alt,map:{image:"/media/"+b.id+"-board-small.webp",alt:b.alt,x:100*p.bounds[0]/b.width,y:100*p.bounds[1]/b.height,width:100*(p.bounds[2]-p.bounds[0])/b.width,height:100*(p.bounds[3]-p.bounds[1])/b.height},caption:"Panel "+(i+1)+" of 3 · "+p.name,href:"/work/storyboard-sheets/?sheet="+b.id+"&panel="+(i+1)+"#"+b.id+"-panel-"+(i+1)}))}/>)}</article></Site>

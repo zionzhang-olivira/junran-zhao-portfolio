@@ -1,0 +1,40 @@
+---
+import "./fox-project.css";
+---
+<article class="fx-project">
+  <header class="fx-opening">
+    <div><a class="fx-back" data-context-back href="/work/animation/">← Animation</a><h1>Fox motion <em>studies.</em></h1></div>
+    <p>Junran Zhao<br/><span>2D animation &amp; character drawing</span></p>
+  </header>
+  <section class="fx-feature" id="original-film" aria-labelledby="fox-pull-title">
+    <header class="fx-caption"><h2 id="fox-pull-title">The rope pull</h2><span>Silent · 2.24 s</span></header>
+    <div class="fx-viewports">
+      <figure><figcaption data-held-label hidden>Held pose <output data-held-time></output></figcaption>
+        <video controls muted playsinline preload="metadata" width="1280" height="720" poster="/media/fox-pull.webp" src="/media/fox-pull.mp4" id="fox-original" aria-label="The rope pull, original silent animation"></video></figure>
+      <figure data-comparison hidden><figcaption>Moving pose <output data-moving-time></output></figcaption>
+        <video muted playsinline preload="none" width="1280" height="720" aria-label="Second pose from the same film"></video></figure>
+    </div>
+    <div class="fx-controls">
+      <p data-film-context>Original film · Junran Zhao</p>
+      <button type="button" data-study hidden>Compare two moments</button>
+      <div class="fx-study-tools" data-study-tools hidden>
+        <label for="fox-playhead">Move the second pose</label>
+        <input id="fox-playhead" type="range" min="0" max="2.23" step=".01" value="0" />
+        <button type="button" data-hold>Hold this pose</button>
+        <button type="button" data-rejoin>Play from here <span aria-hidden="true">▸</span></button>
+      </div>
+    </div>
+  </section>
+  <section class="fx-pair" aria-label="Two more original motion studies">
+    <div id="branch-film"><div class="fx-caption"><h2>The branch</h2><span>Silent · 2.90 s</span></div><video controls playsinline preload="none" width="864" height="484" poster="/media/fox-branch.webp" aria-label="The branch, original silent animation" src="/media/fox-branch.mp4"></video></div>
+    <div id="truck-film"><div class="fx-caption"><h2>The truck</h2><span>Silent · 3.75 s</span></div><video controls playsinline preload="none" width="1280" height="720" poster="/media/fox-truck.webp" aria-label="The truck, original silent animation" src="/media/fox-truck.mp4"></video></div>
+  </section>
+  <section class="fx-model" id="model-sheet"><div class="fx-caption"><h2>Turning the fox</h2><a href="/media/fox-turnaround.webp">Open full sheet ↗</a></div>
+  <img src="/media/fox-turnaround.webp" srcset="/media/fox-turnaround-small.webp 640w, /media/fox-turnaround.webp 1600w" sizes="(max-width:700px) 91vw, 88vw" width="1600" height="572" loading="lazy" alt="Five standing views of the fox, from front to back."/></section>
+</article>
+<script>
+  import { initFoxFilm } from "./fox-film.mjs";
+  const project = document.querySelector(".fx-project");
+  if (project) initFoxFilm(project);
+</script>
+

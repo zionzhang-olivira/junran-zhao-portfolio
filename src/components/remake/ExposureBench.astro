@@ -1,0 +1,42 @@
+---
+import "./exposure.css";
+interface Props {
+  controlId?: string;
+}
+const { controlId = "fox-exposure-scrubber" } = Astro.props;
+---
+<section class="ex-bench" data-exposure data-frame-root="/studies/fox/inks/" aria-label="Fox pull exposure sheet">
+  <div class="ex-ledger"><strong>Fox pull</strong><span>Exposure sheet</span><span class="ex-time" data-source-time>1.19 s</span></div>
+  <div class="ex-field">
+    <div class="ex-drawings">
+      <img class="ex-registered" src="/studies/fox/registered-v2.webp" width="768" height="432" alt="Three drawings from the rope pull, registered in pink, black and teal." fetchpriority="high">
+      <div class="ex-plates" hidden aria-hidden="true"><i data-ink="before"></i><i data-ink="after"></i><i data-ink="selected"></i></div>
+    </div>
+    <span class="ex-cross tl" aria-hidden="true"></span><span class="ex-cross tr" aria-hidden="true"></span><span class="ex-cross bl" aria-hidden="true"></span><span class="ex-cross br" aria-hidden="true"></span>
+    <div class="ex-f-number" aria-hidden="true">F<span data-frame-number>17</span></div>
+    <video class="ex-screen" hidden controls playsinline preload="none" width="1280" height="720" aria-label="Fox pull, original silent film"><source src="/media/fox-pull.mp4" type="video/mp4"></video>
+  </div>
+  <div class="ex-color-key" aria-label="Registered drawing colors"><span><i class="earlier"></i>Earlier · pink</span><span><i class="chosen"></i>Selected · black</span><span><i class="later"></i>Later · teal</span></div>
+  <div class="ex-timing" aria-hidden="true"><i></i></div>
+  <div class="ex-foot">
+    <a class="ex-play" data-play-film href="/media/fox-pull.mp4"><span aria-hidden="true">▶</span>Play from pose</a>
+    <button type="button" class="ex-return" data-return hidden>Return to drawings</button>
+    <span class="ex-duration">2.24 seconds</span>
+    <div class="ex-links"><a data-original-link href="/work/fox-motion-studies/?from=animation&frame=17#original-film">Original film <span aria-hidden="true">↗</span></a><a data-model-link href="/work/fox-motion-studies/?from=animation&frame=17#model-sheet">Character sheet <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="ex-tools" hidden>
+    <div class="ex-keys" role="group" aria-label="Choose a drawing"><button type="button" data-pose="1" aria-pressed="false"><span>F01</span>Take hold</button><button type="button" data-pose="8" aria-pressed="false"><span>F08</span>Brace</button><button type="button" data-pose="17" aria-pressed="true"><span>F17</span>Release</button><button type="button" data-pose="29" aria-pressed="false"><span>F29</span>Land</button></div>
+    <details class="ex-more"><summary>Step through 31 drawings</summary><div class="ex-scrub">
+      <button type="button" data-step="-1" aria-label="Previous drawing">←</button><label for={controlId}>Drawing <output data-output>17</output><input id={controlId} type="range" min="1" max="31" value="17" step="1" aria-valuetext="Drawing 17, 1.19 seconds"></label><button type="button" data-step="1" aria-label="Next drawing">→</button>
+      <button class="ex-compare" type="button" data-compare aria-pressed="true">Compare traces</button></div></details>
+  </div>
+  <span class="ex-sr" role="status" data-ex-status></span>
+</section>
+<script>
+  import { gsap } from "gsap";
+  import { initExposure } from "./exposure.mjs";
+
+  document.querySelectorAll("[data-exposure]").forEach(root => initExposure(root, gsap));
+</script>
+
+

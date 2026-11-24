@@ -1,0 +1,14 @@
+---
+import Site from "../../layouts/Site.astro";
+import { contactForBuild,contactRecord } from "../../components/profile/profile.mjs";
+import "../../styles/personal.css";
+const email=contactForBuild(contactRecord,"public");
+---
+<Site title="Contact" current="contact"><article class="contact-leaf wrap">
+<header><p class="page-label">Junran Zhao</p><h1>Get in <i>touch.</i></h1></header>
+<div class="postcard"><section data-contact-actions><h2>Email Junran</h2>{email&&<><a class="mail-address" href={email.href} data-email-address>{email.value}</a><button class="ink-button" type="button" data-copy-email hidden>Copy email address</button><p class="copy-status" data-copy-feedback role="status" aria-live="polite">Select the address to copy it.</p></>}<a class="underlink" href="/resume/">View résumé ↗</a></section>
+<figure><img src="/studies/plates/bench.webp" srcset="/studies/preview/bench-540.webp 540w, /studies/plates/bench.webp 910w" sizes="(max-width:720px) 90vw, 48vw" width="910" height="480" alt="Two siblings leaning into one another on a bench, drawn by Junran Zhao."/><figcaption><a href="/work/character-studies/">The siblings together ↗</a></figcaption></figure></div></article></Site>
+<script>
+import {mountCopyAction} from "../../components/profile/copy-action.mjs";
+const el=document.querySelector("[data-contact-actions]");if(el)mountCopyAction(el);
+</script>

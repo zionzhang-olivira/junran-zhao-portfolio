@@ -1,0 +1,94 @@
+---
+import { boards, panelImage, sheetImage } from "./boards-data.mjs";
+---
+
+<section class="boards-reader" aria-label="Storyboard reader">
+  <noscript><nav class="board-fragments" aria-label="Jump to a drawn panel">{boards.map(b=><div><strong>{b.name}</strong>{b.panels.map((p,i)=><a href={"#"+b.id+"-panel-"+(i+1)}>{p.name}</a>)}</div>)}</nav></noscript>
+  <fieldset class="boards-tabs">
+    <legend class="boards-sr">Choose a storyboard sheet</legend>
+    {boards.map((board, i) => <label>
+      <input type="radio" name="boards-sheet" value={board.id} checked={i === 0} />
+      <span>{board.name}</span>
+    </label>)}
+  </fieldset>
+  {boards.map((board) => <section data-board={board.id} class="boards-sheet" aria-label={board.name}>
+    <div class="boards-projection">
+      <div class="boards-rule">
+        <span>Selected panel</span>
+        <fieldset class="boards-steps">
+          <legend class="boards-sr">Select a panel in the {board.name.toLowerCase()}</legend>
+          {board.panels.map((panel, i) => <label>
+            <input type="radio" name={"boards-panel-" + board.id} value={i + 1} checked={i === 0} aria-label={"Panel " + (i + 1) + ", " + panel.name} />
+            <span>0{i + 1}</span>
+          </label>)}
+        </fieldset>
+      </div>
+      {board.panels.map((panel, i) => <figure data-panel={i + 1} id={board.id+"-panel-"+(i+1)}>
+        <img src={panelImage(board, i)} width={panel.bounds[2]-panel.bounds[0]} height={panel.bounds[3]-panel.bounds[1]} alt={panel.alt} loading={board.id === "sword" && i === 0 ? "eager" : "lazy"} fetchpriority={board.id==="sword"&&i===0?"high":undefined} />
+        <figcaption>
+          <h2>{panel.name}</h2>
+          <p>{panel.note}</p>
+          <div class="panel-actions"><a href={"/work/storyboards/#"+board.id+"-panel-"+(i+1)}>Return to this framing</a><a href={panelImage(board, i)}>Open panel <span aria-hidden="true">↗</span></a></div>
+        </figcaption>
+      </figure>)}
+    </div>
+    <div class="boards-map">
+      <div class="boards-rule"><h2>{board.name}</h2><span>Original sheet</span></div>
+      <div class="boards-map-art">
+        <img src={sheetImage(board)} srcset={"/media/"+board.id+"-board-small.webp 640w, "+sheetImage(board)+" "+board.width+"w"} sizes="(max-width:720px) 90vw, 42vw" width={board.width} height={board.height} alt={board.alt} loading="lazy" />
+        {board.panels.map((panel, i) => {
+          const [x,y,right,bottom] = panel.bounds;
+          return <span data-panel={i + 1} aria-hidden="true" class="boards-map-frame" style={{left: 100*x/board.width+"%",top: 100*y/board.height+"%",width: 100*(right-x)/board.width+"%",height: 100*(bottom-y)/board.height+"%"}}></span>;
+        })}
+      </div>
+      <div class="boards-trace-actions">
+        <button class="boards-trace" type="button" hidden>Trace this panel</button>
+        <a href={sheetImage(board)}>Open original sheet <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>)}
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { mountTrace } from "./boards-motion.js";
+  const reader = document.querySelector<HTMLElement>(".boards-reader");
+  if (reader) {
+    reader.dataset.enhanced="true";
+    const sheets = Array.from(reader.querySelectorAll<HTMLInputElement>('input[name="boards-sheet"]'));
+    const panelRadios = (sheet: string) => Array.from(reader.querySelectorAll<HTMLInputElement>('input[name="boards-panel-' + sheet + '"]'));
+    function restore() {
+      const params = new URLSearchParams(location.search);
+      const fragment=location.hash.match(/^#(sword|window)-panel-([1-3])$/);
+      const sheet = sheets.find((input) => input.value === (fragment?.[1] ?? params.get("sheet"))) ?? sheets[0];
+      sheet.checked = true;
+      const panels = panelRadios(sheet.value);
+      const selected = panels.find((input) => input.value === (fragment?.[2] ?? params.get("panel"))) ?? panels[0];
+      selected.checked = true;
+      if(fragment||params.has("sheet")||params.has("panel"))setReturn(sheet.value,selected.value);
+    }
+    function setReturn(sheet:string,panel:string){const link=document.querySelector<HTMLAnchorElement>(".boards-parent");if(link){link.href="/work/storyboards/#"+sheet+"-panel-"+panel;link.textContent="← Return to "+sheet+" panel "+panel;}}
+    restore();
+    for (const sheet of reader.querySelectorAll<HTMLElement>(".boards-sheet")) {
+      const selected = () => sheet.querySelector<HTMLInputElement>("input:checked")!.value;
+      mountTrace({
+        gsap, root: reader, button: sheet.querySelector<HTMLButtonElement>(".boards-trace")!,
+        source: () => sheet.querySelector<HTMLElement>('.boards-map-frame[data-panel="' + selected() + '"]')!,
+        destination: () => sheet.querySelector<HTMLImageElement>('figure[data-panel="' + selected() + '"] img')!
+      });
+    }
+    window.addEventListener("popstate", restore);
+    window.addEventListener("hashchange", restore);
+    reader.addEventListener("change", () => {
+      const sheet = sheets.find((input) => input.checked)!;
+      const selected = panelRadios(sheet.value).find((input) => input.checked)!;
+      const url = new URL(location.href);
+      url.searchParams.set("sheet", sheet.value);
+      url.searchParams.set("panel", selected.value);
+      url.hash=sheet.value+"-panel-"+selected.value;
+      history.replaceState(history.state, "", url);setReturn(sheet.value,selected.value);
+    });
+  }
+</script>
+
+

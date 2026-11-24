@@ -1,0 +1,16 @@
+.portrait-page,.contact-leaf,.resume-leaf,.missing-leaf{padding-block:clamp(35px,5vw,85px) clamp(55px,7vw,115px)}
+.page-label{margin:0 0 1rem;font:550 .8rem/1.45 var(--body);letter-spacing:.03em}
+:is(.author-heading,.contact-leaf,.resume-leaf,.missing-leaf) h1{font:400 clamp(68px,10vw,172px)/.9 var(--serif);letter-spacing:-.055em;margin:0}
+:is(.author-heading,.contact-leaf,.missing-leaf) h1 i{color:var(--accent)}.author-heading{display:flex;align-items:center;justify-content:space-between;gap:25px;padding-bottom:clamp(28px,4vw,64px)}
+.author-credit{flex-shrink:0;max-width:151px}.author-credit img{width:100%;height:auto;display:block}.author-credit figcaption{font-size:.76rem;margin-top:.35rem}
+.author-role,.resume-leaf header>p:last-child{font-size:clamp(17px,1.6vw,25px);margin:.7rem 0 0}
+.author-intro,.author-statement,.postcard,.resume-record{border-top:1px solid var(--ink);padding-top:clamp(25px,3.7vw,60px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(25px,6vw,100px)}
+.author-intro{align-items:start}.author-intro>a{display:block;text-decoration:none}.author-intro img,.postcard img{display:block;width:100%;height:auto;background:white}.author-intro a span,.postcard figcaption a,.author-links a{display:inline-flex;align-items:center;min-height:44px;gap:.5rem;text-decoration:underline;text-underline-offset:4px;font-size:.9rem}
+:is(.author-intro,.author-statement,.postcard,.resume-record) h2{font:400 clamp(36px,4.2vw,78px)/.97 var(--serif);letter-spacing:-.035em;margin:0}
+.author-intro p,.author-statement p{max-width:50ch;font-size:clamp(16px,1.25vw,21px);line-height:1.55}
+.author-statement{margin-top:clamp(48px,8vw,145px)}.author-statement p:first-child{margin-top:0}.author-links{display:flex;gap:1.3rem;flex-wrap:wrap}
+.postcard,.resume-record{margin-top:clamp(32px,5vw,76px)}.postcard{align-items:center}.postcard section,.resume-file{min-width:0}.postcard .mail-address{font:400 clamp(18px,2.45vw,40px)/1.15 var(--serif);overflow-wrap:anywhere}.copy-status{color:var(--muted);font-size:.87rem}
+.resume-record{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.resume-file .ink-button{display:flex;width:fit-content;margin-top:26px}.resume-file .underlink{margin-top:7px}
+.cv dt{font:400 clamp(22px,2.5vw,38px)/1.1 var(--serif)}.cv div:first-child{padding-top:0}.missing-leaf{display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:center}.missing-leaf img{background:var(--gold)}.missing-leaf .ink-button{margin-right:1rem}
+@media(max-width:740px){.author-credit{max-width:clamp(65px,19vw,112px)}.author-heading{align-items:end}.author-heading h1{font-size:clamp(53px,12vw,80px)}.author-role{font-size:1rem}.author-intro,.author-statement,.postcard,.resume-record,.missing-leaf{grid-template-columns:1fr}.author-intro{gap:16px}.author-intro>a{grid-row:2}.author-links{gap:.55rem 1.2rem}.postcard{gap:20px}.postcard .mail-address{font-size:clamp(22px,5.9vw,41px)}.cv div{grid-template-columns:minmax(86px,.6fr) minmax(0,1.4fr)}}
+@media(max-width:18em){.author-heading{flex-wrap:wrap}.resume-record .cv div{grid-template-columns:1fr}.mail-address{overflow-wrap:anywhere}}

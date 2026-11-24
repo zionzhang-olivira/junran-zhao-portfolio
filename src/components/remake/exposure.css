@@ -1,0 +1,39 @@
+.ex-bench{--ex-ink:#171717;--ex-muted:#5b5b58;--ex-paper:#f7f7f5;--ex-rule:#c6c5c1;--ex-pink:#ad0958;--ex-cyan:#19777e;position:relative;min-width:0;width:100%;color:var(--ex-ink);font-family:inherit;isolation:isolate}
+.ex-bench *, .ex-bench *::before,.ex-bench *::after{box-sizing:border-box}
+.ex-bench [hidden]{display:none!important}
+.ex-bench button,.ex-bench input{font:inherit;color:inherit}
+.ex-bench button,.ex-bench summary,.ex-bench input{cursor:pointer}
+.ex-bench :is(a,button,input,summary):focus-visible{outline:3px solid #9e1254;outline-offset:3px}
+.ex-bench a{color:inherit;text-decoration:none}
+.ex-ledger{border-top:2px solid var(--ex-ink);border-bottom:1px solid var(--ex-rule);display:flex;align-items:center;gap:12px;min-height:46px}
+.ex-ledger strong{font-size:clamp(18px,2.2vw,28px);font-weight:500;letter-spacing:-.045em}
+.ex-ledger>span,.ex-duration,.ex-f-number,.ex-keys button span,.ex-scrub label,.ex-more summary,.ex-time{font:11px/1.15 ui-monospace,Consolas,monospace;letter-spacing:.015em}
+.ex-ledger>span{color:var(--ex-muted)}.ex-ledger .ex-time{margin-left:auto;color:var(--ex-ink);font-variant-numeric:tabular-nums}
+.ex-field{position:relative;overflow:hidden;background:white;aspect-ratio:16/9;isolation:isolate}
+.ex-drawings,.ex-plates,.ex-plates i,.ex-registered,.ex-screen{position:absolute;inset:0;width:100%;height:100%}
+.ex-bench .ex-registered,.ex-bench .ex-screen{display:block;object-fit:contain;max-width:none}
+.ex-plates i{display:block;background:#161616;mask:var(--drawing) center/100% 100% no-repeat;mix-blend-mode:multiply}
+.ex-plates [data-ink=before]{background:#d0106f}.ex-plates [data-ink=after]{background:var(--ex-cyan)}
+.ex-screen{z-index:2;background:white}
+.ex-cross{position:absolute;width:9px;height:9px;opacity:.48;pointer-events:none}.ex-cross:before,.ex-cross:after{content:"";position:absolute;background:var(--ex-ink)}.ex-cross:before{width:100%;height:1px;top:4px}.ex-cross:after{height:100%;width:1px;left:4px}.ex-cross.tl{left:12px;top:11px}.ex-cross.tr{right:12px;top:11px}.ex-cross.bl{left:12px;bottom:11px}.ex-cross.br{right:12px;bottom:11px}
+.ex-f-number{position:absolute;left:32px;bottom:10px;color:var(--ex-muted);font-size:10px}
+.ex-timing{height:9px;border-block:1px solid var(--ex-rule);position:relative;background:repeating-linear-gradient(90deg,transparent 0 calc(3.125% - 1px),#a19e98 calc(3.125% - 1px) 3.125%)}
+.ex-timing i{display:block;position:absolute;inset:-1px 0;background:#b20d5c;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);transform:scaleX(.53125);transform-origin:left}
+.ex-foot{display:flex;align-items:center;gap:10px;min-height:56px;border-bottom:1px solid var(--ex-rule);flex-wrap:wrap;padding-block:5px}
+.ex-play,.ex-return{min-height:44px;background:var(--ex-ink);color:white!important;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 15px;border:0;font-size:14px;font-weight:500}
+.ex-play span{font-size:10px}.ex-play:hover,.ex-return:hover{background:var(--ex-pink)}.ex-duration{color:var(--ex-muted)}
+.ex-links{margin-left:auto;display:flex;gap:16px}.ex-links a,.ex-more summary{min-height:44px;display:inline-flex;align-items:center;gap:4px;font-size:12px}.ex-links a:hover,.ex-more summary:hover{text-decoration:underline;text-underline-offset:4px}
+.ex-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--ex-rule)}
+.ex-keys button{display:flex;gap:7px;align-items:center;justify-content:flex-start;padding:3px 5px;min-width:0;min-height:45px;background:transparent;border:none;border-right:1px solid var(--ex-rule);font-size:13px;text-align:left}
+.ex-keys button:last-child{border-right:0}.ex-keys button span{font-size:10px;color:var(--ex-muted)}.ex-keys button[aria-pressed=true]{box-shadow:inset 0 -3px var(--ex-pink);color:var(--ex-pink)}.ex-keys button[aria-pressed=true] span{color:var(--ex-pink)}.ex-keys button:hover{background:#ebe9e6}
+.ex-more summary{display:flex;width:fit-content;list-style:none;font-size:11px}.ex-more summary::-webkit-details-marker{display:none}.ex-more summary::before{content:"+";width:14px;color:var(--ex-pink);font:17px/1 ui-monospace,monospace}.ex-more[open] summary::before{content:"−"}
+.ex-scrub{display:flex;align-items:center;gap:9px;padding:6px 0 10px}.ex-scrub button{min-width:44px;min-height:44px;background:transparent;border:1px solid var(--ex-rule)}
+.ex-scrub label{display:grid;grid-template-columns:1fr auto;flex:1;gap:0 6px;min-width:0}.ex-scrub input{grid-column:span 2;width:100%;margin:0;height:30px;accent-color:var(--ex-pink)}
+.ex-scrub .ex-compare{font-size:11px;padding-inline:8px}.ex-scrub .ex-compare[aria-pressed=true]{background:var(--ex-ink);color:white}
+.ex-sr{clip-path:inset(50%);width:1px;height:1px;overflow:hidden;position:absolute;white-space:nowrap}
+@media(max-width:720px){.ex-ledger strong{font-size:21px}.ex-keys button{flex-direction:column;align-items:flex-start;justify-content:center;gap:3px}.ex-links{gap:12px}.ex-foot{gap:6px}.ex-duration{display:none}.ex-links a{font-size:11px}.ex-play,.ex-return{font-size:13px;padding-inline:10px}}
+@media(max-width:365px){.ex-links{gap:8px}.ex-links a{font-size:10px}.ex-scrub{gap:5px}.ex-scrub .ex-compare{font-size:10px}.ex-f-number{font-size:9px}}.ex-bench{--ex-ink:var(--ink,#171716);--ex-muted:var(--muted,#5b5b58);--ex-paper:var(--paper,#f7f7f5);--ex-rule:var(--line,#aaa8a1);--ex-pink:var(--accent,#ad0958);color:var(--ex-ink)}
+
+.ex-color-key{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center;border-top:1px solid var(--ex-rule);padding:.4rem 0;font:600 .78rem/1.35 var(--body)}.ex-color-key span{display:inline-flex;align-items:center;gap:.35rem}.ex-color-key i{width:14px;height:3px;background:#222}.ex-color-key .earlier{background:var(--ex-pink)}.ex-color-key .later{background:var(--ex-cyan)}.ex-bench[data-mode=film] .ex-color-key,.ex-bench:has([data-compare][aria-pressed=false]) .ex-color-key{display:none}
+.ex-bench .ex-f-number,.ex-bench .ex-f-number [data-frame-number]{color:#64594c;opacity:1}
+.ex-bench .ex-f-number{background:#fffaf1;color:#342a23;padding:.06em .2em}.ex-bench .ex-f-number [data-frame-number]{background:#fffaf1;color:inherit}

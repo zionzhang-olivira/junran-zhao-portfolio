@@ -1,0 +1,18 @@
+---
+import Plate from "./Plate.astro";
+interface Props { pavilion:boolean; }
+const {pavilion}=Astro.props;
+const art=pavilion?"pavilion-phoenix":"red-hood";
+const title=pavilion?"Tengwang Pavilion and Phoenix":"Red Hood and the Wolf";
+---
+<article class:list={["folio-page",pavilion?"pavilion-project":"hood-project"]}>
+<header class="work-head"><div><a class="backline" href="/work/illustration/">Characters &amp; illustration</a><h1>{title}</h1></div><p>{pavilion?"Long feathers arc above stacked roofs. Follow the artist’s line from the phoenix’s wings down to the tiles.":"The wolf holds red berries between the two figures. The same red catches on the girl’s curls and runs along the wolf’s muzzle."}</p></header>
+{pavilion ? <div class="vertical-reading"><figure class="full-sheet" id="pavilion-full"><picture><img src="/studies/plates/pavilion-reading.webp" srcset="/studies/preview/pavilion-288.webp 288w, /studies/plates/pavilion-reading.webp 528w, /studies/preview/pavilion-832.webp 832w" sizes="(max-width:720px) 90vw, 50vw" width="832" height="1479" fetchpriority="high" alt="A phoenix spreads its wings above a tiered pavilion in a vertical ink drawing."/></picture><figcaption><a href="/work/illustration/#pavilion-full">Return to this drawing</a><a href="/media/pavilion-phoenix.webp">Open the full drawing ↗</a></figcaption></figure><aside class="details-column"><h2>Reading the line</h2><figure id="plumage"><picture><source media="(max-width: 720px)" srcset="/studies/plates/plumage-reading.webp"/><img src="/studies/plates/plumage-reading.webp" srcset="/studies/plates/plumage-reading.webp 264w, /studies/plates/plumage.webp 680w" sizes="(max-width: 720px) 38vw, 30vw" width="680" height="656" alt="Detail from the original drawing showing the phoenix’s feathered wing." loading="lazy"/></picture><figcaption>Feathers <a href="/work/illustration/#plumage">Return to this detail</a></figcaption></figure><figure id="roof"><picture><source media="(max-width: 720px)" srcset="/studies/plates/roof-reading.webp"/><img src="/studies/plates/roof-reading.webp" srcset="/studies/plates/roof-reading.webp 264w, /studies/plates/roof.webp 735w" sizes="(max-width: 720px) 38vw, 30vw" width="735" height="605" alt="Detail of the pavilion’s tiled eaves and beams." loading="lazy"/></picture><figcaption>Eaves <a href="/work/illustration/#roof">Return to this detail</a></figcaption></figure></aside></div>
+: <div class="painting-reading"><figure class="full-sheet" id="hood-full"><Plate art={art} eager sizes="(max-width: 700px) 96vw, 92vw"/><figcaption><a href="/work/illustration/#hood-full">Return to this painting</a><a href="/media/red-hood.webp">Open full image ↗</a></figcaption></figure><div class="painting-detail" id="berries"><img src="/studies/plates/berries.webp" width="510" height="375" loading="lazy" alt="A closer look at the offered berries and the red-lit profile."/><div><span class="eyeline">Detail of the original</span><h2>The offer</h2><a href="/work/illustration/#berries">Return to the berries detail</a><p>In the dark space between the figures, the berries are just large enough to draw the eye from one face to the other.</p></div></div></div>}
+</article>
+<script>
+const back=document.querySelector<HTMLAnchorElement>(".hood-project .backline,.pavilion-project .backline");
+function restore(){if(back&&["#berries","#roof","#plumage","#hood-full","#pavilion-full"].includes(location.hash)){back.href="/work/illustration/"+location.hash;back.textContent="← Return to the selected view";}}
+restore();window.addEventListener("hashchange",restore);
+</script>
+

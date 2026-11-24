@@ -1,0 +1,156 @@
+---
+import { artwork } from "../../data/gallery";
+const lights = ["morning", "night", "neon"].map(id => {
+  const art = artwork("room-" + id);
+  const medium = "/studies/light/room-" + id + "-832.webp";
+  return {id, ...art, displaySet: art.small + " 640w, " + medium + " 832w, " + art.src + " 1600w"};
+});
+const [morning, night] = lights;
+---
+<section class="light-bench" aria-label="Compare room lighting studies" data-light-bench>
+  {lights.map(light=><div class="entry-light" id={"study-"+light.id}><noscript><img src={light.small} alt={light.alt}/><a href={"/work/visual-development/#room-"+light.id}>Return to {light.title}</a></noscript></div>)}
+  {lights.map(light=><span id={light.id} aria-hidden="true" style="display:block;height:0"></span>)}
+  <div class="bench-options" data-tools hidden>
+    <fieldset class="variant-select"><legend>Left study</legend><select aria-label="Left study" data-side="left">
+      {lights.map(art=><option value={art.id} selected={art.id==="morning"} data-src={art.src} data-srcset={art.displaySet} data-small={art.small} data-alt={art.alt}>{art.title}</option>)}
+    </select></fieldset>
+    <fieldset class="variant-select"><legend>Right study</legend><select aria-label="Right study" data-side="right">
+      {lights.map(art=><option value={art.id} selected={art.id==="night"}>{art.title}</option>)}
+    </select></fieldset>
+    <button class="field-button" data-field type="button" aria-pressed="false">Focus on the room</button>
+  </div>
+  <div class="comparison" data-frame style="--seam: 27%">
+    <div class="plate"><img draggable="false" data-board="left" src={morning.small} srcset={morning.displaySet} sizes="(min-width:1400px) 1280px, 94vw" width={morning.width} height={morning.height} alt={morning.alt} fetchpriority="high"/></div>
+    <div class="plate right-plate"><img draggable="false" data-board="right" src={night.small} srcset={night.displaySet} sizes="(min-width:1400px) 1280px, 94vw" width={night.width} height={night.height} alt={night.alt}/></div>
+    <i class="registration" aria-hidden="true"></i>
+  </div>
+  <div class="bench-track" data-tools hidden>
+    <label for="light-registration">Comparison seam</label><input type="range" min="0" max="100" step="1" value="27" id="light-registration" />
+    <p>Drag across the drawing or use the arrow keys.</p>
+  </div>
+  <noscript><p>Morning and Night appear above. Open any full sheet below to see a single study.</p></noscript>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  document.querySelectorAll<HTMLElement>('[data-light-bench]').forEach(bench=>{
+    const left=bench.querySelector<HTMLSelectElement>('[data-side="left"]')!;
+    const right=bench.querySelector<HTMLSelectElement>('[data-side="right"]')!;
+    const leftImage=bench.querySelector<HTMLImageElement>('[data-board="left"]')!;
+    const rightImage=bench.querySelector<HTMLImageElement>('[data-board="right"]')!;
+    const frame=bench.querySelector<HTMLElement>('[data-frame]')!;
+    const slider=bench.querySelector<HTMLInputElement>('input[type=range]')!;
+    const fieldButton=bench.querySelector<HTMLButtonElement>('[data-field]')!;
+    const options=Array.from(left.options);
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+    const images=[leftImage,rightImage];
+    const clampPercent=gsap.utils.clamp(0,100);
+    let activeFocus: gsap.core.Tween | undefined;
+    let activeRegister: gsap.core.Timeline | undefined;
+    reduced.addEventListener('change',()=>{
+      if(reduced.matches){
+        activeFocus?.progress(1);
+        activeRegister?.progress(1);
+      }
+    });
+    const defaults={left:left.value,right:right.value};
+
+    function updateLevel(){
+      frame.style.setProperty('--seam',slider.value+'%');
+      slider.setAttribute('aria-valuetext',slider.value+' percent '+left.selectedOptions[0].text);
+    }
+    function drawSide(select: HTMLSelectElement,img: HTMLImageElement){
+      const record=options.find(o=>o.value===select.value)!;
+      const focused=frame.classList.contains('is-focused');
+      const sources=focused?record.dataset.src+' 1600w':record.dataset.srcset!;
+      const fallback=focused?record.dataset.src!:record.dataset.small!;
+      if (img.srcset!==sources) img.srcset=sources;
+      if (img.getAttribute('src')!==fallback) img.src=fallback;
+      img.alt=record.dataset.alt!;
+    }
+    function showStudies(changed?: HTMLSelectElement){
+      if(left.value===right.value && changed){
+        if(changed===left) right.value=defaults.left;
+        else left.value=defaults.right;
+      }
+      for(const [select,img] of [[left,leftImage],[right,rightImage]] as const){
+        drawSide(select,img);
+      }
+      if (changed && !reduced.matches) {
+        activeRegister?.progress(1).kill();
+        const plate=changed===left?leftImage.parentElement!:rightImage.parentElement!;
+        activeRegister=gsap.timeline({defaults:{ease:'power2.out'}})
+          .addLabel('place',0)
+          .fromTo(plate,{y:-9},{y:0,duration:.32,clearProps:'transform'},'place');
+      }
+      defaults.left=left.value;
+      defaults.right=right.value;
+      updateLevel();
+    }
+    function point(event:PointerEvent){
+      const bounds=frame.getBoundingClientRect();
+      slider.value=String(Math.round(clampPercent(100*(event.clientX-bounds.left)/bounds.width)));
+      updateLevel();
+    }
+    const entry=new URL(location.href);
+    const deepLink=entry.searchParams.get("light")??location.hash.slice(1).replace(/^study-/,"");
+    function saveChoice(){
+      const url=new URL(location.href);url.searchParams.set("light",left.value);url.searchParams.set("with",right.value);url.hash="study-"+left.value;
+      history.replaceState(history.state,"",url);
+      setReturn();
+    }
+    function setReturn(){const link=document.querySelector<HTMLAnchorElement>(".room-title>a");if(link){link.href="/work/visual-development/#room-"+left.value;link.textContent="← Return to "+left.selectedOptions[0].text;}}
+    if(options.some(item=>item.value===deepLink)){
+      left.value=deepLink;
+      const other=entry.searchParams.get("with");
+      right.value=options.some(o=>o.value===other)&&other!==deepLink?other!:deepLink==="night"?"morning":"night";
+      defaults.left=left.value;defaults.right=right.value;
+    }
+    left.addEventListener('change',()=>{showStudies(left);saveChoice();});
+    right.addEventListener('change',()=>{showStudies(right);saveChoice();});
+    slider.addEventListener('input',updateLevel);
+    frame.addEventListener('pointerdown',e=>{
+      if(!e.isPrimary || e.button!==0)return;
+      frame.setPointerCapture(e.pointerId);
+      point(e);
+    });
+    frame.addEventListener('pointermove',e=>{
+      if(frame.hasPointerCapture(e.pointerId))point(e);
+    });
+    frame.addEventListener('pointerup',e=>{
+      if(frame.hasPointerCapture(e.pointerId))frame.releasePointerCapture(e.pointerId);
+    });
+    fieldButton.addEventListener('click',()=>{
+      const focused=frame.classList.toggle('is-focused');
+      drawSide(left,leftImage);
+      drawSide(right,rightImage);
+      fieldButton.setAttribute('aria-pressed',String(focused));
+      activeFocus?.kill();
+      activeFocus=gsap.to(images,{scale:focused?1.85:1,transformOrigin:'23% 46%',duration:reduced.matches?0:.45,ease:'power3.inOut',overwrite:'auto'});
+      slider.value=focused?"50":"27";
+      updateLevel();
+    });
+    showStudies();if(options.some(o=>o.value===deepLink))setReturn();
+    bench.querySelectorAll<HTMLElement>('[data-tools]').forEach(el=>el.hidden=false);
+  });
+</script>
+
+<style>
+.entry-light:not(:target){display:none}.entry-light img{width:min(100%,700px);height:auto}.entry-light a{display:block;padding:.8rem 0}.bench-track p{margin:0}
+.light-bench{color:var(--ink);width:100%}
+.bench-options,.bench-track{display:flex;align-items:end;gap:clamp(.7rem,2vw,2rem);padding:1.1rem 0}
+.variant-select{min-width:0;margin:0;padding:0;border:0}
+.variant-select legend,.bench-track label{font-size:.85rem;font-weight:bold}
+.variant-select select,.field-button{min-height:44px;font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--ink);border-radius:0;padding:.4rem .8rem;margin:0}
+.variant-select select{min-width:8.2em;cursor:pointer}
+.field-button{margin-left:auto}.field-button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.comparison{position:relative;isolation:isolate;aspect-ratio:1600/963;background:white;overflow:hidden;user-select:none;touch-action:pan-y;cursor:ew-resize}
+.plate,.registration{position:absolute;inset:0;pointer-events:none}.plate img{display:block;width:100%;max-width:none;height:auto;-webkit-user-drag:none}.right-plate{clip-path:inset(0 0 0 var(--seam))}.registration{inset:0 auto 0 var(--seam);width:2px;background:#17252b;box-shadow:0 0 0 1px #ffffffae}
+.registration::before,.registration::after{content:'';position:absolute;left:-6px;top:0;width:14px;height:11px;background:#17252b;clip-path:polygon(0 0,100% 0,50% 100%)}
+.registration::after{top:auto;bottom:0;transform:rotate(180deg)}
+.plate img{transform-origin:23% 46%}
+.bench-track{align-items:center;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid var(--ink)}
+.bench-track input{flex:1;min-width:100px;min-height:44px;accent-color:var(--accent);margin:0}.bench-track p{font-size:.86rem}
+@media(max-width:650px){.bench-options{gap:.75rem;flex-wrap:wrap;justify-content:start}.variant-select{flex:1}.variant-select select{width:100%;min-width:0}.field-button{margin:0;width:100%}.bench-track{gap:.2rem .8rem}.bench-track p{width:100%}}
+</style>
+

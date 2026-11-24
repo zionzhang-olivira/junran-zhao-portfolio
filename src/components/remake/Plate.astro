@@ -1,0 +1,8 @@
+---
+import { artwork } from "../../data/gallery";
+interface Props { art: string; eager?: boolean; sizes?: string; }
+const { art, eager=false, sizes="(max-width: 700px) 96vw, 76vw" }=Astro.props;
+const image=artwork(art);
+---
+<img src={image.src} srcset={image.srcset} {sizes} width={image.width} height={image.height} alt={image.alt} decoding="async" loading={eager?"eager":"lazy"} fetchpriority={eager?"high":undefined} />
+

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env*
+PRIVATE_INPUT/
+*.zip
+
+
+.taste-skill/
+

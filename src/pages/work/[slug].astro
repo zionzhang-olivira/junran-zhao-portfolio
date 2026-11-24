@@ -1,0 +1,20 @@
+---
+import FoxProject from "../../components/remake/FoxProject.astro";
+import Site from "../../layouts/Site.astro";
+import { projects, projectPath, type Project } from "../../data/gallery";
+import RoomProject from "../../components/remake/RoomProject.astro";
+import TempleProject from "../../components/remake/TempleProject.astro";
+import BoardsProject from "../../components/remake/BoardsProject.astro";
+import CharacterProject from "../../components/remake/CharacterProject.astro";
+import IllustrationProject from "../../components/remake/IllustrationProject.astro";
+export function getStaticPaths(){return projects.map(project=>({params:{slug:project.slug},props:{project}}));}
+interface Props{project:Project}
+const {project}=Astro.props;
+const index=projects.findIndex(s=>s.slug===project.slug);
+const nextStudy=projects[(index+1)%projects.length];
+const previousStudy=projects[(index-1+projects.length)%projects.length];
+---
+<Site title={project.title} description={project.summary} current="work">
+{project.slug==="fox-motion-studies" ? <FoxProject/> : project.slug==="room-light-studies" ? <RoomProject/> : project.slug==="temple-environment" ? <TempleProject/> : project.slug==="storyboard-sheets" ? <BoardsProject/> : project.slug==="character-studies" ? <CharacterProject/> : <IllustrationProject pavilion={project.slug==="pavilion-and-phoenix"}/>}
+<footer class="project-colophon wrap"><div class="project-author"><span>Artist credit</span>{project.credits.map(c=><p>{c.person} · {c.roles.join(", ")}</p>)}</div><nav aria-label="Browse projects"><a href={projectPath(previousStudy)}><small>← Previous work</small><strong>{previousStudy.title}</strong></a><a href={projectPath(nextStudy)}><small>Next work →</small><strong>{nextStudy.title}</strong></a></nav></footer>
+</Site>

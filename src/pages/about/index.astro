@@ -1,0 +1,9 @@
+---
+import Site from "../../layouts/Site.astro";
+import {profile} from "../../components/profile/profile.mjs";
+import "../../styles/personal.css";
+---
+<Site title="About the artist" current="about"><article class="portrait-page wrap">
+<header class="author-heading"><div><p class="page-label">About the artist</p><h1>Junran <i>Zhao</i></h1><p class="author-role">{profile.role}</p></div><figure class="author-credit"><img src="/media/artist-cv.webp" width="151" height="192" alt="Junran Zhao, from his artist résumé."/><figcaption>Junran Zhao</figcaption></figure></header>
+<section class="author-intro"><a href="/work/character-studies/"><img src="/studies/plates/gestures.webp" width="486" height="696" loading="lazy" alt="Junran’s two siblings in pencil, showing different gestures."/><span>Character drawings ↗</span></a><div><h2>Drawing with <i>line.</i></h2>{profile.bio.map(p=><p>{p}</p>)}</div></section>
+<section class="author-statement" id="statement"><h2>Artist <i>statement</i></h2><div>{profile.statement.map(p=><p>{p}</p>)}<p class="author-links"><a href="/work/animation/">Watch the fox studies ↗</a><a href="/resume/">View résumé ↗</a></p></div></section></article></Site>

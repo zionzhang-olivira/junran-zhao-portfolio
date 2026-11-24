@@ -1,0 +1,107 @@
+{
+  "fox-pull": {
+    "width": 1280,
+    "height": 720,
+    "smallWidth": 640,
+    "smallHeight": 360,
+    "duration": 2.24
+  },
+  "fox-branch": {
+    "width": 864,
+    "height": 484,
+    "smallWidth": 640,
+    "smallHeight": 359,
+    "duration": 2.9
+  },
+  "fox-truck": {
+    "width": 1280,
+    "height": 720,
+    "smallWidth": 640,
+    "smallHeight": 360,
+    "duration": 3.75
+  },
+  "fox-turnaround": {
+    "width": 1600,
+    "height": 572,
+    "smallWidth": 640,
+    "smallHeight": 229
+  },
+  "room-morning": {
+    "width": 1600,
+    "height": 963,
+    "smallWidth": 640,
+    "smallHeight": 385
+  },
+  "room-night": {
+    "width": 1600,
+    "height": 963,
+    "smallWidth": 640,
+    "smallHeight": 385
+  },
+  "room-neon": {
+    "width": 1600,
+    "height": 963,
+    "smallWidth": 640,
+    "smallHeight": 385
+  },
+  "sword-board": {
+    "width": 1653,
+    "height": 1079,
+    "smallWidth": 640,
+    "smallHeight": 418
+  },
+  "window-board": {
+    "width": 1578,
+    "height": 1079,
+    "smallWidth": 640,
+    "smallHeight": 438
+  },
+  "red-hood": {
+    "width": 1600,
+    "height": 900,
+    "smallWidth": 640,
+    "smallHeight": 360
+  },
+  "pavilion-phoenix": {
+    "width": 1080,
+    "height": 1920,
+    "smallWidth": 640,
+    "smallHeight": 1138
+  },
+  "satchel-character": {
+    "width": 1080,
+    "height": 1236,
+    "smallWidth": 640,
+    "smallHeight": 732
+  },
+  "siblings": {
+    "width": 1600,
+    "height": 697,
+    "smallWidth": 640,
+    "smallHeight": 279
+  },
+  "siblings-poses": {
+    "width": 1424,
+    "height": 1079,
+    "smallWidth": 640,
+    "smallHeight": 485
+  },
+  "siblings-turnaround": {
+    "width": 1079,
+    "height": 1093,
+    "smallWidth": 640,
+    "smallHeight": 648
+  },
+  "temple-warm": {
+    "width": 1600,
+    "height": 963,
+    "smallWidth": 640,
+    "smallHeight": 385
+  },
+  "temple-cool": {
+    "width": 1600,
+    "height": 963,
+    "smallWidth": 640,
+    "smallHeight": 385
+  }
+}

@@ -1,0 +1,28 @@
+---
+import {artwork} from "../../data/gallery";
+import LightBench from "./LightBench.astro";
+const boards=["morning","night","neon"].map(id=>artwork("room-"+id));
+---
+<article class="room-project">
+  <header class="room-title">
+    <a href="/work/visual-development/">Visual Development</a>
+    <div><h1>Room light <em>studies.</em></h1><p>The furniture stays put. Compare the painted light on the bed, shelves, and rug.</p></div>
+  </header>
+  <LightBench/>
+  <section class="original-studies" aria-labelledby="room-sheets">
+    <div><h2 id="room-sheets">Three full <em>sheets.</em></h2><p>Each drawing pairs the room with Junran’s original chair, artwork, and prop studies.</p></div>
+    <div class="sheets">{boards.map(board=><a href={board.src}><span>{board.title} <i aria-hidden="true">↗</i></span><img src={board.small} srcset={board.small + " 640w, /studies/light/" + board.key + "-832.webp 832w"} sizes="(min-width:750px) 28vw, 90vw" fetchpriority="low" width={board.width} height={board.height} alt={board.alt} loading="lazy"/></a>)}</div>
+  </section>
+</article>
+<style>
+.room-project :is(h1,h2,p){margin:0}.room-project img{display:block;height:auto}.room-title h1,.original-studies h2{font-weight:700}
+.room-project{width:min(88rem,calc(100% - var(--edge,5vw) * 2));margin:auto;padding:clamp(1.8rem,4.5vw,5.8rem) 0}
+.room-title>a,.room-project footer{font-size:.92rem}.room-title>div{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.55fr);gap:3vw;align-items:end;border-bottom:1px solid var(--ink);padding:1.2rem 0 1.6rem}.room-title h1,.original-studies h2{font-family:var(--display,var(--serif,Georgia));font-weight:400;letter-spacing:-.025em;line-height:.93;overflow-wrap:anywhere}.room-title h1{font-size:clamp(3.6rem,7.6vw,8.5rem)}.room-title p,.original-studies p{max-width:34ch;font-size:clamp(1rem,1.24vw,1.2rem)}
+.original-studies{padding:clamp(3.5rem,8vw,8rem) 0}.original-studies>div:first-child{display:flex;gap:2rem;align-items:end;justify-content:space-between}.original-studies h2{font-size:clamp(3rem,6.3vw,6.6rem)}.sheets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.7rem,1.6vw,2rem);margin-top:1.8rem}.sheets a{display:block;color:inherit;text-decoration:none}.sheets a>span{border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;padding:.5rem 0}.sheets a i{font-style:normal}.sheets a:hover span{text-decoration:underline}.sheets img{width:100%}.room-project footer{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--ink);padding-top:1rem}
+@media(max-width:700px){.room-title>div{display:block}.room-title p{margin-top:1rem}.original-studies>div:first-child{display:block}.original-studies p{margin:.9rem 0}.sheets{grid-template-columns:1fr;gap:1.8rem}}
+</style>
+
+
+
+
+

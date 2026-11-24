@@ -1,0 +1,195 @@
+.pose-desk {
+  --plate: #ffcca2;
+  --plate-ink: #222520;
+  --plate-rule: #906f54;
+  color: var(--plate-ink);
+  background: var(--plate);
+  border: 1px solid var(--plate-rule);
+  min-width: 0;
+  align-self: center;
+  position: relative;
+  scroll-margin-top: 6rem;
+}
+.pose-desk [hidden] {
+  display: none !important;
+}
+.pose-head,
+.pose-ruler-head,
+.pose-actions,
+.pose-scrub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pose-head,
+.pose-console,
+.pose-actions {
+  padding: clamp(10px, 1vw, 18px) clamp(14px, 1.6vw, 26px);
+}
+.pose-head {
+  border-bottom: 1px solid var(--plate-rule);
+}
+.pose-head h2 {
+  margin: 0;
+  color: inherit;
+  font:
+    600 clamp(21px, 2vw, 32px)/1.1 Georgia,
+    serif;
+  letter-spacing: -0.055em;
+}
+.pose-count,
+.pose-ruler-head {
+  font:
+    500 12px/1.4 ui-monospace,
+    Consolas,
+    monospace;
+  font-variant-numeric: tabular-nums;
+}
+.pose-count strong {
+  font-weight: 700;
+}
+.pose-stage {
+  aspect-ratio: 16/9;
+  position: relative;
+}
+.pose-stage img,
+.pose-stage video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.pose-stage video {
+  background: white;
+}
+.pose-console {
+  border-block: 1px solid var(--plate-rule);
+  padding-block: 0.6rem 0.2rem;
+}
+.pose-ruler-head {
+  gap: 10px;
+}
+.pose-scrub {
+  gap: 10px;
+}
+.pose-scrub button,
+.pose-actions a,
+.pose-actions button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.pose-scrub button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: 24px/1 Arial;
+  cursor: pointer;
+  padding: 0;
+}
+.pose-scrub button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.pose-track {
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+}
+.pose-track input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  accent-color: var(--plate-ink);
+  cursor: ew-resize;
+}
+.pose-ticks {
+  background: repeating-linear-gradient(
+    to right,
+    #81674f 0 1px,
+    transparent 1px calc(100% / 30)
+  );
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 3px;
+  height: 4px;
+  pointer-events: none;
+}
+.pose-ticks i {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #222520;
+  transform-origin: left;
+  transform: scaleX(0.53125);
+}
+.pose-actions {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.pose-actions a,
+.pose-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font:
+    600 clamp(13px, 1vw, 15px)/1.2 Arial,
+    sans-serif;
+  text-decoration: none;
+}
+.pose-play {
+  padding: 9px 17px;
+  color: #fff9ee;
+  background: var(--plate-ink);
+  border: 1px solid var(--plate-ink);
+  cursor: pointer;
+}
+.pose-play span {
+  font-size: 12px;
+}
+.pose-detail {
+  color: var(--plate-ink);
+  text-underline-offset: 4px;
+}
+.pose-detail:hover {
+  text-decoration: underline;
+}
+.pose-desk :focus-visible {
+  outline: 3px solid #2957a1;
+  outline-offset: 2px;
+}
+.pose-message {
+  margin: 0;
+  padding-inline: 14px;
+  font-size: 14px;
+}
+.pose-message:not(:empty) {
+  padding-bottom: 12px;
+}
+@media (max-width: 430px) {
+  .pose-head,
+  .pose-console,
+  .pose-actions {
+    padding-inline: 12px;
+  }
+  .pose-actions {
+    gap: 4px 8px;
+  }
+  .pose-actions a,
+  .pose-actions button {
+    font-size: 13px;
+  }
+  .pose-play {
+    padding-inline: 10px;
+  }
+  .pose-stage {
+    margin: 0;
+  }
+  .pose-ticks {
+    bottom: 4px;
+  }
+}

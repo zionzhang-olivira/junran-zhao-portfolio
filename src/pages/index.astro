@@ -1,0 +1,43 @@
+---
+import Site from "../layouts/Site.astro";
+import PoseDesk from "../components/v3/PoseDesk.astro";
+import "../styles/cover.css";
+const work=[
+ {url:"/work/animation/",name:"Animation",image:"/media/fox-turnaround.webp",w:1600,h:572,alt:"Five views of Junran’s fox, from front to back.",caption:"Three drawings from Fox pull",kind:"fox"},
+ {url:"/work/illustration/",name:"Characters & illustration",image:"/media/red-hood.webp",w:1600,h:900,alt:"Beneath dark branches, the wolf holds out red berries to Red Hood.",caption:"Red Hood and the Wolf",kind:"paint"},
+ {url:"/work/storyboards/",name:"Storyboards",image:"/studies/boards/sword-pan-reading.webp",w:1514,h:463,alt:"The artist’s red camera marks run across a line drawing of a figure with a sword.",caption:"Camera movement study",kind:"boards"},
+ {url:"/work/visual-development/",name:"Visual development",image:"/studies/light/room-neon-832.webp",w:832,h:500,alt:"A cutaway room in pink and blue light alongside drawings of its furniture.",caption:"Room light studies",kind:"room"}
+];
+---
+<Site title="Junran Zhao">
+<section class="cover" aria-labelledby="artist-name"><div class="wrap"><div class="hero-text">
+<div class="cover-byline"><div><h1 id="artist-name"><span class="profession">2D Animator <span>&amp;</span> Character Designer</span> <span class="artist-signature">Junran Zhao</span></h1><a class="mobile-voice" href="/about/#statement">“I am particularly drawn to black-and-white line art.”</a></div>
+<div class="cover-note"><p>“I believe that simple lines can express complex emotions, personalities, and stories without relying on color or elaborate visual effects.”</p><a href="/about/#statement">Artist statement <span aria-hidden="true">↗</span></a></div>
+<a class="work-jump home-action" href="#work">Explore selected work <span aria-hidden="true">↓</span></a></div>
+<PoseDesk/></div></div>
+</section>
+<section id="work" class="cover-work" aria-labelledby="work-title"><div class="wrap"><header class="folio-rule"><h2 id="work-title">Selected <i>work</i></h2><a href="/work/character-studies/">Character sheets <span aria-hidden="true">↗</span></a></header>
+<div class="work-spread">{work.map(w=><article class={"work-plate "+w.kind}>
+<a href={w.url}><div class="work-mat">{w.kind==="fox" ? <div class="pose-strip">{["08","17","29"].map((n,i)=><img loading="lazy" src={"/studies/preview/f"+n+"-240.webp"} width="240" height="135" alt={["The fox braces.","The rope releases.","The fox lands."][i]}/>)}</div> : <img loading="lazy" src={w.image} srcset={w.kind==="paint" ? "/media/red-hood-small.webp 640w, /media/red-hood.webp 1600w" : w.kind==="boards" ? "/studies/preview/sword-pan-reading-640.webp 640w, /studies/boards/sword-pan-reading.webp 1514w" : "/media/room-neon-small.webp 640w, /studies/light/room-neon-832.webp 832w"} sizes="(max-width:760px) 91vw, 49vw" width={w.w} height={w.h} alt={w.alt}/>}</div>
+<div class="plate-foot"><div><p>{w.caption}</p><h3>{w.kind==="boards"?"Storyboard drawings":w.kind==="room"?"Environment design":w.name}</h3></div><span aria-hidden="true">↗</span></div></a></article>)}</div></div></section>
+<section class="line-note"><div class="wrap"><div><h2>About <i>Junran</i></h2><p>Junran Zhao studies Animation and Visual Effects at the Academy of Art University in San Francisco.</p><a class="home-action" href="/about/">Meet the artist <span aria-hidden="true">↗</span></a><a href="/resume/">View résumé ↗</a></div><a class="gesture-link" data-moment="picture-develops" data-moment-opts='{"look":"film"}' href="/work/character-studies/"><img src="/studies/plates/bench.webp" srcset="/studies/preview/bench-540.webp 540w, /studies/plates/bench.webp 910w" sizes="(max-width:760px) 91vw, min(90.4vw, 81.5svh, 910px)" width="910" height="480" loading="lazy" alt="Two siblings lean together on a bench. View the character sheets."/></a></div></section>
+<script is:inline type="module" src="/assets/moments/moments.js"></script>
+</Site>
+<style>
+#artist-name .profession{display:block;letter-spacing:normal}
+#artist-name .artist-signature,#artist-name .profession{color:var(--ink)}
+.cover .home-action,.line-note a.home-action{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:44px;padding:.55rem 1rem;background:var(--ink);border:1px solid var(--ink);color:var(--paper);font:600 .9rem/1.22 var(--body);text-decoration:none;letter-spacing:normal}
+.cover .home-action span{display:inline;width:auto;height:auto;border:none;border-radius:0}
+.home-action:hover,.line-note a.home-action:hover{background:var(--accent);border-color:var(--accent);color:white}
+.cover-note a:hover,.mobile-voice:hover,.folio-rule a:hover,.line-note a:not(.home-action):hover{color:var(--accent);text-decoration:underline;text-decoration-thickness:2px}
+.gesture-link{overflow:hidden}.gesture-link img{transition:transform .2s ease}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.gesture-link:hover img,.gesture-link:focus-visible img{transform:scale(1.018)}}
+@media(max-width:760px){.cover .home-action{margin-top:.35rem}}
+</style>
+
+
+
+
+
+
+

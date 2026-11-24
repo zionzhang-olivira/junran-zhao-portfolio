@@ -1,0 +1,27 @@
+{
+  "name": "junran-zhao-portfolio",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "node scripts/guard.mjs && astro build && node scripts/prune-media.mjs && node scripts/check.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs src/components/profile/profile.test.mjs",
+    "preview": "node scripts/preview.mjs",
+    "typecheck": "astro check"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "astro": "6.4.8",
+    "gsap": "3.15.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "22.19.0",
+    "axe-core": "4.14.1",
+    "typescript": "5.9.3"
+  }
+}

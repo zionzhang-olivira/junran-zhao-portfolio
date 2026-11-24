@@ -1,0 +1,36 @@
+---
+import Site from "../../../layouts/Site.astro";
+import ExposureBench from "../../../components/remake/ExposureBench.astro";
+---
+<Site title="Animation" current="work" description="Junran Zhao’s original fox films and an interactive 31-drawing exposure sheet.">
+  <article class="ani-folio">
+    <header class="ani-head"><h1>Animation.</h1><div><a href="/work/fox-motion-studies/?from=animation">All three fox films <span aria-hidden="true">↗</span></a><p>Three short films by Junran Zhao.</p></div></header>
+    <section class="ani-study" id="drawing">
+      <div class="ani-reading"><p class="ani-format">2D animation / Character drawing</p><h2>The rope <em>pull.</em></h2><p>The feet brace, the hands open, and the body falls back. Choose a drawing and play from that moment in the original film.</p></div>
+      <div id="frame-17"><ExposureBench /></div>
+    </section>
+    <section class="ani-films" aria-label="More fox films">
+      <a href="/work/fox-motion-studies/?from=animation#branch-film"><img src="/media/fox-branch-small.webp" width="640" height="359" loading="lazy" alt="The fox reaching toward a branch."/><span>The branch <i>2.90 s ↗</i></span></a>
+      <a href="/work/fox-motion-studies/?from=animation#truck-film"><img src="/media/fox-truck-small.webp" width="640" height="360" loading="lazy" alt="Drawing from the fox and truck animation."/><span>The truck <i>3.75 s ↗</i></span></a>
+    </section>
+  </article>
+</Site>
+<style>
+  .ani-folio{width:min(var(--max,1450px),calc(100% - 2 * var(--edge,4vw)));margin:auto;padding:clamp(28px,5vw,80px) 0}
+  .ani-folio h1,.ani-folio h2,.ani-folio p{margin:0}
+  .ani-head{display:flex;align-items:end;justify-content:space-between;gap:32px;padding-bottom:clamp(22px,4vw,60px);border-bottom:2px solid var(--ink)}
+  .ani-head h1,.ani-study h2{font:700 clamp(72px,10.5vw,160px)/.88 var(--display);letter-spacing:-.045em}
+  .ani-head>div{max-width:38ch}.ani-head a,.ani-reading a{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:inherit;text-decoration:underline;text-underline-offset:4px}
+  .ani-head a{font-weight:600}.ani-head p,.ani-reading>p:not(.ani-format){font:400 clamp(16px,1.26vw,21px)/1.45 var(--body,sans-serif)}
+  .ani-study{display:grid;grid-template-columns:minmax(0,.58fr) minmax(0,1.42fr);gap:clamp(22px,5vw,90px);align-items:center;padding:clamp(28px,5.5vw,85px) 0}
+  .ani-format{font:12px/1.35 var(--mono,monospace);color:var(--muted)}
+  .ani-study h2{font-size:clamp(54px,7vw,112px);margin:22px 0}.ani-study h2 em{color:var(--accent);font-style:normal}.ani-reading>p:not(.ani-format){max-width:31ch}.ani-reading a{margin-top:18px}
+  @media(max-width:760px){.ani-head{display:block}.ani-head h1{font-size:clamp(62px,14vw,100px);margin-bottom:18px}.ani-head p{max-width:43ch}.ani-study{grid-template-columns:1fr}.ani-study h2{font-size:clamp(52px,13vw,90px);margin:12px 0}.ani-study h2 br{display:none}.ani-study h2 em{margin-left:.12em}.ani-reading a{margin-top:5px}}
+  .ani-folio{padding-block:clamp(20px,3vw,47px)}.ani-head{padding-bottom:clamp(18px,2vw,30px)}.ani-head h1{font-size:clamp(62px,8vw,138px)}.ani-study{padding-block:clamp(20px,3vw,44px)}
+  @media(max-width:760px){.ani-study #frame-17{order:-1}.ani-head h1{margin-bottom:6px}.ani-reading{border-top:1px solid var(--line);padding-top:18px}}
+  .ani-folio .ani-head h1,.ani-folio .ani-study h2,.ani-film-title{font-family:var(--serif,Georgia,serif);font-weight:400;letter-spacing:-.045em}.ani-folio .ani-study h2 em{font-style:italic;color:inherit}
+  .ani-films{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,48px);margin-top:clamp(32px,6vw,90px)}.ani-films a{color:inherit;text-decoration:none;border-top:1px solid var(--ink);padding-top:12px}
+  .ani-films img{width:100%;height:auto;display:block}.ani-films span{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:8px;font:400 clamp(24px,3vw,44px)/1.2 var(--serif,Georgia,serif)}.ani-films i{font:400 .84rem var(--body)}.ani-films a:hover span{text-decoration:underline}
+  @media(max-width:700px){.ani-films{grid-template-columns:1fr}.ani-films a+a{margin-top:12px}}
+</style>
+

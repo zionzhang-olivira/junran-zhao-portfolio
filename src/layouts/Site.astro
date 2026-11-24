@@ -1,0 +1,45 @@
+---
+import "../styles/site.css";
+import "../styles/editorial.css";
+import "../styles/reflow.css";
+import "../styles/edition.css";
+import { categories,categoryPath,type Category } from "../data/gallery";
+interface Props { title:string; description?:string; current?:string; }
+const {title,description="Drawings, films and visual development by Junran Zhao, a 2D animator and character designer.",current}=Astro.props;
+const path=Astro.url.pathname;
+const FooterLinks=path==="/"?"div":Fragment;
+const name=path==="/"?"Junran Zhao — 2D Animator & Character Designer":title+" — Junran Zhao";
+const nav=[["/about/","About"],["/resume/","Résumé"],["/contact/","Contact"]];
+const sections=["animation","illustration","storyboards","visual-development"] as Category[];
+---
+<!doctype html><html lang="en" data-type="service"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="portfolio-edition" content="3"/><title>{name}</title><meta name="description" content={description}/>
+<link rel="canonical" href={new URL(path,Astro.site).href}/><meta property="og:url" content={new URL(path,Astro.site).href}/><meta name="robots" content={path.includes("404")?"noindex":"index,follow"}/><meta name="page-type" content="service"/><meta name="site-kind" content="other"/>
+<meta name="theme-color" content="#f6f3e9"/><meta property="og:title" content={name}/><meta property="og:description" content={description}/>
+<meta name="twitter:card" content="summary_large_image"/><meta property="og:image" content="https://jystud.io/media/fox-pull.webp"/><meta property="og:type" content="website"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="preload" href="/fonts/display.woff2" as="font" type="font/woff2" crossorigin/>
+</head><body>{path!=="/" && <a href="#main" class="skip">Skip to content</a>}
+<header class:list={["edition-head", path==="/" && "nav"]}><div class="edition-bar wrap">{path==="/" && <a href="#main" class="skip">Skip to content</a>}<a class="signature" href="/" aria-label="Jz. — Junran Zhao, home"><span aria-hidden="true">J<i>z</i>.</span></a><span class="header-name">Junran Zhao</span>
+<nav class="edition-nav" aria-label="Main navigation"><details class="work-menu"><summary class:list={[current==="work"&&"active"]}>Work <span aria-hidden="true">⌄</span></summary>
+<div class="menu-panel"><a href="/#work">Selected work</a>{sections.map(k=><a href={categoryPath(k)} aria-current={path===categoryPath(k)?"page":undefined}>{categories[k].name}</a>)}</div></details>
+{nav.map(([url,label])=><a href={url} aria-current={path===url?"page":undefined}>{label}</a>)}</nav></div></header>
+<main id="main" tabindex="-1"><slot/></main>
+<footer class:list={["edition-foot", path==="/" && "closing"]}><div class="wrap"><div class="footer-sign"><a href="/">Junran <i>Zhao</i></a><p>2D Animator &amp; Character Designer</p>{path==="/" && <a class="footer-art" href="/work/pavilion-and-phoenix/"><img src="/studies/preview/pavilion-528.webp" srcset="/studies/preview/pavilion-288.webp 288w, /studies/preview/pavilion-528.webp 528w, /studies/preview/pavilion-832.webp 832w" sizes="(max-width:760px) min(91vw, 14.1svh), min(45vw, 22.5svh, 259px)" width="832" height="1479" loading="lazy" alt="Explore Tengwang Pavilion and Phoenix, a line drawing by Junran Zhao."/></a>}</div>
+<FooterLinks class="footer-links"><nav aria-label="Work categories">{sections.map(k=><a href={categoryPath(k)}>{categories[k].name}</a>)}</nav>
+<nav aria-label="Artist information">{nav.map(([url,label])=><a href={url}>{label}</a>)}</nav>
+</FooterLinks></div></footer>
+<script>
+const menu=document.querySelector<HTMLDetailsElement>(".work-menu");
+if(menu){const close=()=>menu.open=false;
+document.addEventListener("click",e=>{if(!menu.contains(e.target as Node))close();});
+document.addEventListener("focusin",e=>{if(!menu.contains(e.target as Node))close();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&menu.open){close();menu.querySelector("summary")?.focus();}});
+window.addEventListener("pagehide",close);}
+const films=Array.from(document.querySelectorAll("video"));
+films.forEach(f=>f.addEventListener("play",()=>films.forEach(other=>{if(other!==f)other.pause();})));
+const pause=()=>films.forEach(f=>f.pause());
+document.addEventListener("visibilitychange",()=>{if(document.hidden)pause();});window.addEventListener("pagehide",pause);
+</script></body></html>
+
+

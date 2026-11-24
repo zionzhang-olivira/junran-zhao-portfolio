@@ -1,0 +1,72 @@
+---
+const angles=["Front","Side","Back"];
+const nativeWidths={brother:[183,140,194],sister:[151,114,151]};
+---
+<section class="turn-reader" aria-labelledby="turn-title" data-turns>
+<div class="turn-copy"><p class="eyeline">Color model sheet</p><h2 id="turn-title">Turn the pair</h2><p>The boy’s shirt keeps its straight hem. His sister’s bag travels from the front of her coat to her back. Compare the three drawn views.</p>
+<fieldset class="turn-picks" hidden><legend>View angle</legend>{angles.map((angle,i)=><button type="button" data-angle={i} aria-pressed={i===0?"true":"false"}>{angle}</button>)}</fieldset><a href="/media/siblings-turnaround.webp" class="underlink">Open full model sheet ↗</a></div>
+<div class="turn-window" role="region" aria-label="Three drawn angles" tabindex="0"><div class="turn-reel">{angles.map((angle,i)=><figure class="turn-pair" id={"turn-"+angle.toLowerCase()}><div><img src={'/studies/plates/brother-'+angle.toLowerCase()+'.webp'} alt={'Brother, '+angle.toLowerCase()+' view'} width={nativeWidths.brother[i]} height="570" loading="lazy"/><img src={'/studies/plates/sister-'+angle.toLowerCase()+'.webp'} alt={'Sister, '+angle.toLowerCase()+' view'} width={nativeWidths.sister[i]} height="343" loading="lazy"/></div><figcaption>{angle} view · <a href={"/work/illustration/#turn-"+angle.toLowerCase()}>Return to this view</a></figcaption></figure>)}</div></div>
+</section>
+<style>
+.turn-reader{display:grid;grid-template-columns:.66fr 1fr;gap:6vw;align-items:center;padding:clamp(25px,4vw,60px) 0}.turn-copy p:not(.eyeline){max-width:43ch;line-height:1.55}.turn-picks{border:0;padding:0;margin:1.2rem 0}.turn-picks legend{font:600 .76rem var(--mono);margin-bottom:.5rem}.turn-picks button{min-height:46px;min-width:65px;font:600 .94rem var(--body);border:1px solid var(--ink);margin:0 8px 6px 0;background:transparent;color:var(--ink);cursor:pointer}.turn-picks button[aria-pressed=true]{background:var(--ink);color:white}.turn-window{overflow:hidden;border:1px solid var(--ink);background:white}.turn-reel{display:flex}.turn-pair{min-width:0;flex:1;color:#193028}.turn-pair>div{display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,2vw,32px);padding:1.2rem .25rem .6rem}.turn-pair img{width:auto;height:clamp(70px,7vw,105px);max-width:55%;object-fit:contain}.turn-pair img+img{height:clamp(43px,4.5vw,64px)}.turn-pair figcaption{justify-content:center;font:600 .77rem var(--mono)}.turn-reader[data-ready] .turn-reel{width:100%}.turn-reader[data-ready] .turn-pair{flex:0 0 100%}.turn-reader[data-ready] .turn-pair>div{padding:2rem;gap:8%}.turn-reader[data-ready] .turn-pair img{height:clamp(168px,21vw,350px)}.turn-reader[data-ready] .turn-pair img+img{height:clamp(102px,12.7vw,211px)}
+@media(max-width:650px){.turn-reader{grid-template-columns:1fr;gap:.4rem}.turn-copy p{margin:.5rem 0}.turn-picks{margin:.8rem 0}.turn-reader[data-ready] .turn-pair img{height:180px}.turn-reader[data-ready] .turn-pair img+img{height:110px}}
+.turn-reader:not([data-ready]) .turn-reel:has(:target) .turn-pair:not(:target){display:none}.turn-reader:not([data-ready]) .turn-pair:target img{height:160px}.turn-reader:not([data-ready]) .turn-pair:target img+img{height:98px}</style>
+<style is:inline>
+/* Reserve the enhanced geometry while the module loads. Native scrolling keeps
+   the three drawings reachable when the module fails. */
+@media(scripting:enabled){
+ .turn-reader:not([data-ready]) .turn-window{overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin}
+ .turn-reader:not([data-ready]) .turn-reel{width:100%}
+ .turn-reader:not([data-ready]) .turn-pair{display:block;flex:0 0 100%;scroll-snap-align:start}
+ .turn-reader:not([data-ready]) .turn-pair>div{padding:2rem;gap:8%}
+ .turn-reader:not([data-ready]) .turn-pair img,.turn-reader:not([data-ready]) .turn-pair:target img{height:clamp(168px,21vw,350px)}
+ .turn-reader:not([data-ready]) .turn-pair img+img,.turn-reader:not([data-ready]) .turn-pair:target img+img{height:clamp(102px,12.7vw,211px)}
+ .turn-reader:not([data-ready]) .turn-picks[hidden]{display:block!important;visibility:hidden}
+ .turn-reader:not([data-ready]) .turn-reel:has(:target) .turn-pair:not(:target){display:block!important}
+}
+@media(scripting:enabled) and (max-width:650px){
+ .turn-reader:not([data-ready]) .turn-pair img,.turn-reader:not([data-ready]) .turn-pair:target img{height:180px}
+ .turn-reader:not([data-ready]) .turn-pair img+img,.turn-reader:not([data-ready]) .turn-pair:target img+img{height:110px}
+}
+</style>
+<script>
+import {gsap} from "gsap";
+function mount(root:HTMLElement) {
+  const rail=root.querySelector<HTMLElement>(".turn-reel")!;
+  const controls=root.querySelector<HTMLFieldSetElement>("fieldset")!;
+  const buttons=Array.from(root.querySelectorAll<HTMLButtonElement>("button[data-angle]"));
+  const panels=Array.from(rail.querySelectorAll<HTMLElement>("figure"));
+  const angles=["front","side","back"];const entry=new URL(location.href);
+  let selected=Math.max(0,angles.indexOf(entry.hash.slice(1).replace("turn-","")||entry.searchParams.get("angle")||"front"));
+  function setReturn(){const link=document.querySelector<HTMLAnchorElement>(".char-project .backline");if(link){link.href="/work/illustration/#turn-"+angles[selected];link.textContent="← Return to the "+angles[selected]+" view";}}
+  let move:gsap.core.Tween|undefined;
+  const media=gsap.matchMedia();
+  root.dataset.ready="true";
+  const viewport=root.querySelector<HTMLElement>(".turn-window")!;viewport.scrollLeft=0;viewport.removeAttribute("tabindex");
+  controls.hidden=false;
+  function describe(index:number){buttons.forEach((b,i)=>b.setAttribute("aria-pressed",String(i===index)));panels.forEach((p,i)=>{p.setAttribute("aria-hidden",String(i!==index));p.inert=i!==index;});}
+  describe(selected);if(angles.includes(entry.hash.slice(1).replace("turn-",""))||angles.includes(entry.searchParams.get("angle")??""))setReturn();
+  media.add({motion:"(prefers-reduced-motion: no-preference)",reduce:"(prefers-reduced-motion: reduce)"},ctx=>{
+    gsap.set(rail,{xPercent:-100*selected});
+    const choose=(event:MouseEvent)=>{
+      const button=(event.target as Element).closest<HTMLButtonElement>("button[data-angle]");
+      if(!button)return;
+      selected=Number(button.dataset.angle);describe(selected);setReturn();
+      const url=new URL(location.href);url.hash="turn-"+angles[selected];url.searchParams.set("angle",angles[selected]);history.replaceState(history.state,"",url);
+      move?.kill();
+      move=gsap.to(rail,{xPercent:-100*selected,duration:ctx.conditions?.motion ? 0.32 : 0,ease:"power2.out",overwrite:true});
+    };
+    controls.addEventListener("click",choose);
+    return ()=>{controls.removeEventListener("click",choose);move?.kill();};
+  });
+  return ()=>{media.revert();controls.hidden=true;delete root.dataset.ready;panels.forEach(p=>{p.removeAttribute("aria-hidden");p.inert=false;});};
+}
+const el=document.querySelector<HTMLElement>("[data-turns]");
+if(el){let dispose=mount(el);window.addEventListener("pagehide",()=>dispose());window.addEventListener("pageshow",e=>{if(e.persisted)dispose=mount(el);});}
+</script>
+
+
+
+
+
+

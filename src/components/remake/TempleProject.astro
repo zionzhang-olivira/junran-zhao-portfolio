@@ -1,0 +1,23 @@
+---
+import { artwork } from "../../data/gallery";
+const warm=artwork("temple-warm"), cool=artwork("temple-cool");
+---
+<article class="temple">
+  <header><a href="/work/visual-development/">Visual Development</a><div><h1>Temple <em>interiors.</em></h1><p>Follow the aisle to the seated figure. In the second painting, a line of blue light pulls the eye toward the right wall.</p></div></header>
+  <section class="temple-theatre" aria-label="Two paintings of the temple">
+    <div class="cue-note"><span>View along the aisle</span><h2>Lamplight</h2><a href="/work/visual-development/#temple-warm">Return to warm interior</a><a href={warm.src}>Open full painting <i aria-hidden="true">↗</i></a></div>
+    <a id="temple-warm" class="warm-scene" href={warm.src} aria-label="Open full lamplight temple painting"><img src={warm.src} srcset={warm.srcset} sizes="(min-width:920px) 76vw, 95vw" width={warm.width} height={warm.height} alt={warm.alt} fetchpriority="high"/></a>
+    <div class="cue-note cool-note"><span>View toward the wall</span><h2>Blue light</h2><a href="/work/visual-development/#temple-cool">Return to cool interior</a><a href={cool.src}>Open full painting <i aria-hidden="true">↗</i></a></div>
+    <a id="temple-cool" class="cool-scene" href={cool.src} aria-label="Open full blue light temple painting"><img src={cool.src} srcset={cool.srcset} sizes="(min-width:920px) 76vw, 95vw" width={cool.width} height={cool.height} alt={cool.alt} loading="lazy"/></a>
+  </section>
+</article>
+<style>
+.temple :is(h1,h2,p){margin:0}.temple img{display:block;height:auto}.temple h1,.temple h2{font-weight:700}.cue-note h2{margin:.6rem 0 1rem}
+.temple{width:min(91rem,calc(100% - var(--edge,5vw)*2));margin:auto;padding:clamp(1.8rem,4.5vw,5.8rem) 0}
+.temple header>a,.temple footer{font-size:.92rem}.temple header>div{display:flex;justify-content:space-between;align-items:end;gap:3vw;padding:1.2rem 0 2.3rem}.temple header p{max-width:32ch}.temple h1,.temple h2{font-family:var(--display,var(--serif,Georgia));font-weight:400;letter-spacing:-.024em;line-height:.94;overflow-wrap:anywhere}.temple h1{font-size:clamp(3.8rem,8.7vw,10rem)}
+.temple-theatre{display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.2fr) minmax(0,.65fr);gap:0;align-items:center;background:#342722;color:#f7ebd9}
+.cue-note{grid-column:1;grid-row:1;padding:clamp(1.2rem,3.2vw,3.8rem)}.cue-note span{font-size:.82rem}.cue-note h2{margin:.6rem 0 1rem;font-size:clamp(2.1rem,4.3vw,5rem)}.cue-note a{display:inline-flex;align-items:center;gap:.3rem;min-height:44px;font-size:.9rem}.cue-note a:hover{color:white}.cue-note i{font-style:normal}
+.warm-scene{grid-row:1;grid-column:2/4}.cool-scene{grid-row:2;grid-column:1/3}.cool-note{grid-row:2;grid-column:3}.temple-theatre img{width:100%}.temple-theatre a:focus-visible{outline-offset:-5px}
+.temple footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--ink);margin-top:clamp(2.5rem,5vw,5rem);padding-top:1rem}
+@media(max-width:700px){.temple header>div{display:block}.temple header p{margin-top:1rem}.temple-theatre{display:flex;flex-direction:column;align-items:stretch}.cue-note{padding:.85rem 1rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:0 .8rem}.cue-note span{grid-column:1/-1}.cue-note h2{margin:.2rem 0 .1rem}.cue-note a{line-height:1.15}.temple h1{font-size:clamp(3.25rem,14vw,5.5rem)}}
+</style>

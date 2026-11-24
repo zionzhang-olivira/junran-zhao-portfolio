@@ -1,0 +1,121 @@
+{
+  "local_preview_files": {
+    "fox-turnaround.webp": {
+      "sha256": "44716de05f24526326e0795ed107e158300bc812c0ee8c9609d2f7a82fd6c977"
+    },
+    "room-night.webp": {
+      "sha256": "1266044a0217f0e4e2c6bc8794ed11cc3114646c831dfa51e17cbd83cf2880f5"
+    },
+    "window-board.webp": {
+      "sha256": "56556cb7ec43561cf7059c92da0020a3242665d1f7998bc9fb794fe9faec8a63"
+    },
+    "siblings.webp": {
+      "sha256": "6d246a095a81c1d822ee711ccc49715d91e812c5d9268812edbd90837111d66a"
+    },
+    "window-board-small.webp": {
+      "sha256": "8e26b9eedb086b5341b6138877666fdb18c5ce6dc317632c7963f8fca13c395c"
+    },
+    "fox-branch.webp": {
+      "sha256": "5626671f451d99b191cdc43caa38e4b8b5f6a9532af17ee2b389c10fed4e4f2b"
+    },
+    "siblings-turnaround-small.webp": {
+      "sha256": "0a6db24060d7f616493d72faa3b4a4ac69dda9639689374e693d523d09a8f2b8"
+    },
+    "satchel-character.webp": {
+      "sha256": "6cf42a4897b559a4daa6d3e58ff4fe1106d4bed9aaf0e10231ab34d4b941b029"
+    },
+    "fox-branch-small.webp": {
+      "sha256": "72aa2fb94f80ac275813d90363fe9072bb549752a3f8da853069fd81d5e1faa4"
+    },
+    "fox-turnaround-small.webp": {
+      "sha256": "97799f3c9b2d6ce8c5eb8c5a4ecdcc0801218fe024ffc5a72d41b4858a29346f"
+    },
+    "siblings-turnaround.webp": {
+      "sha256": "82c9a0f1adf18fade12cbd621fb83c19dab22afcdda5708dd433e8f364129732"
+    },
+    "artist-cv.webp": {
+      "sha256": "988f33e450528d08d06c1824a28f94afa12115e7ae29697a1c5edeca7d175505"
+    },
+    "fox-pull-small.webp": {
+      "sha256": "d7c9279a7a9b65f4aee7581760ba62df5c1ee497afa01fb693e2a76112e0c36f"
+    },
+    "fox-truck.webp": {
+      "sha256": "b479bd1c6e908b196daf0b804452a3c85dd492257d5a278578cd28e0e0d4caca"
+    },
+    "sword-board-small.webp": {
+      "sha256": "fbd3575a119cdbd27ab780b756493249ec12ac6f03e1b6dec398a911be614ca6"
+    },
+    "temple-warm.webp": {
+      "sha256": "2d83faab21ffdc6da1a99fc39b7ae15fe51a70bf5736892b04de54a5dd708dfd"
+    },
+    "temple-cool.webp": {
+      "sha256": "9f2edf5380ad4a32dde4fc07bd83c1a141371e95f5d01d8c16ec3ff2c3d4f705"
+    },
+    "pavilion-phoenix-small.webp": {
+      "sha256": "d565def9fadbaaa5a77e325ea3319abb6d388a6a650c9660fd69839c85248d83"
+    },
+    "siblings-small.webp": {
+      "sha256": "ed774d5393d09c18e780820b26487a1151c1554d25a85ffd65ff64c5a3a40ef0"
+    },
+    "fox-truck.mp4": {
+      "sha256": "0be5d151ac843238de17105511485f46bc117b2f7ce26fc4c5b6695454ba2397"
+    },
+    "fox-pull.webp": {
+      "sha256": "9305f2f4eae6880e3d4733ef362900816fd1cbce9b8eed3bc433804e48403c59"
+    },
+    "room-night-small.webp": {
+      "sha256": "bb63c4030c5c276fcf5d2b18c948aa61a3dee2493f8b8031469ff05793ba2ece"
+    },
+    "temple-warm-small.webp": {
+      "sha256": "39d95e0db3a3d84f4ba55fb75766b07d210999e1d91d8a91a466c9f07fb6c8ce"
+    },
+    "fox-truck-small.webp": {
+      "sha256": "b49bb063359230f1e3ea8a601ba93b41ddf4d621b5e20e954eea0d4796eca1ec"
+    },
+    "room-morning.webp": {
+      "sha256": "50dcd8c6a5c1c3ee75b032b969c8ac0ba34411f4550a9810950840b98b7009a2"
+    },
+    "junran-zhao-resume.pdf": {
+      "sha256": "d586423e4764c600d18e107d45cf8f4591fe5ebc7d0c74dda487828bf903ffe4"
+    },
+    "red-hood.webp": {
+      "sha256": "584dab518b066388bd6c25434e406fa699a30d0c0f8329261f187ca3fc1753c8"
+    },
+    "room-neon-small.webp": {
+      "sha256": "6672ae2c6989e454753a11503d470ef4a757423bd2e8a9861648e25075b72a12"
+    },
+    "sword-board.webp": {
+      "sha256": "649b888bdadaf35c79c8648f8e40595a35542e5e5a71291bc6443f393f43c785"
+    },
+    "red-hood-small.webp": {
+      "sha256": "0312a20d734c9a58def20496050ca97aaef206ab06855e9de46fc8b8bc4fce82"
+    },
+    "temple-cool-small.webp": {
+      "sha256": "aa3002598b52c11cebc2dd136ed56c81a6dce72908d6773f0710ee8294b05ee2"
+    },
+    "room-morning-small.webp": {
+      "sha256": "715e8418b63a22e8d9d38a2db8d2e6033d46ec20b4dae1563f7b909b5ae4b895"
+    },
+    "room-neon.webp": {
+      "sha256": "7a1c6194ba1d500245fc6dc5fb4f7642daca8ca33b72fc11a133691f8b0f1b3d"
+    },
+    "fox-pull.mp4": {
+      "sha256": "6b6bb270552b2484054936464043d8d8640a976414b0c57186c0b5e7a8301ce6"
+    },
+    "fox-branch.mp4": {
+      "sha256": "cbb0ebaab56d6f6f78dbb7a8ca2d61c3cc79f24fbdb84b20f3f8628e8271762d"
+    },
+    "siblings-poses-small.webp": {
+      "sha256": "49b38eb84f589cc4e02e16290ab0922333b234a62b359ab3a000843b650975d5"
+    },
+    "pavilion-phoenix.webp": {
+      "sha256": "82d7c6cfd1b62994076a8f398ea11e7c95cd45acea919dc0ee517fb85a5b3d6c"
+    },
+    "siblings-poses.webp": {
+      "sha256": "6c331276dd73078042dbfe092df6885a0a4d745e343598b5533f0a675b9b817f"
+    },
+    "satchel-character-small.webp": {
+      "sha256": "d982022b855475a8fad183e41c067533fd902bb4859b4fe67d96dbeb37db5057"
+    }
+  }
+}

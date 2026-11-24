@@ -1,0 +1,15 @@
+---
+import Turns from "./Turns.astro";
+import Plate from "./Plate.astro";
+const sheets=[["siblings","Gestures and expressions"],["siblings-turnaround","Front, profile and back"],["siblings-poses","The siblings together"],["satchel-character","Satchel character study"]];
+---
+<article class="folio-page char-project">
+<header class="work-head"><div><a class="backline" href="/work/illustration/">Characters &amp; illustration</a><h1>Character sheets</h1></div><p>The sister’s eyebrows carry a change of mood. Her brother’s glasses stay level as his mouth and eyes change beneath them.</p></header>
+<div class="expression-duet">
+<figure><img src="/studies/plates/sister.webp" width="536" height="284" fetchpriority="high" alt="Seven of the sister’s expressions, with the artist’s handwritten notes." /><figcaption>Sister <span>Expressions from the original sheet</span></figcaption></figure>
+<figure><img src="/studies/plates/brother.webp" width="664" height="372" loading="eager" alt="Seven of the brother’s expressions, from doubt to shock." /><figcaption>Brother <span>Expressions from the original sheet</span></figcaption></figure>
+</div>
+<Turns /><div class="rule-heading"><h2>Model sheets</h2><span>Four original sheets</span></div>
+<div class="sheet-register">{sheets.map(([key,label],i)=><details open={i===0}><summary><span>{label}</span><span class="toggle-icon" aria-hidden="true"></span></summary><figure><Plate art={key}/><figcaption><a href={'/media/'+key+'.webp'}>Open full sheet <span aria-hidden="true">↗</span></a></figcaption></figure></details>)}</div></article>
+
+

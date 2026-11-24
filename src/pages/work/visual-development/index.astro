@@ -1,0 +1,9 @@
+---
+import Site from "../../../layouts/Site.astro";
+import Observation from "./_Observation.astro";
+import {artwork} from "../../../data/gallery";
+import "./_edition.css";
+const lights=["morning","night","neon"].map(id=>{const a=artwork("room-"+id);return {id:"room-"+id,label:id[0].toUpperCase()+id.slice(1),image:"/studies/light/room-"+id+"-832.webp",alt:a.alt,caption:a.title+" · full source sheet",href:"/work/room-light-studies/?light="+id+"#study-"+id};});
+const temples=["warm","cool"].map(id=>{const a=artwork("temple-"+id);return {id:"temple-"+id,label:id==="warm"?"Warm interior":"Cool interior",image:a.src,alt:a.alt,caption:a.title,href:"/work/temple-environment/#temple-"+id};});
+---
+<Site title="Visual Development" current="work" description="Compare Junran Zhao’s original sheets for a room under three lights and two temple interiors."><article class="edition"><header class="folio-intro"><h1>Visual Development</h1><p>Start with a room. Change the light and watch the bed, shelves and rug draw your eye to a different part of the composition.</p></header><Observation first title="Room light studies" prompt="Choose a painted light. Carry that sheet to the comparison table." action="Compare this light" picks={lights}/><Observation title="Temple interiors" prompt="Choose an interior to examine its light and perspective." action="Enter this interior" picks={temples}/></article></Site>

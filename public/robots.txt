@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jystud.io/sitemap.xml
